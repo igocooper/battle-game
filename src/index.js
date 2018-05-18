@@ -5,6 +5,8 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import  configureStore  from './utils/configureStore.js';
 
+import 'semantic-ui-css/semantic.min.css';
+
 // init store
 const reduxStore = configureStore();
 

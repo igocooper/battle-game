@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
+import { troopsConstants } from '../constants/troops';
+
+import Character from './Character';
 
 export default class Troop extends Component {
   render() {
+      const troop = troopsConstants[this.props.match.params.id];
     return (
-      <div>
-        Hi! I'm showing {this.props.match.params.id}
+      <div className='troop'>
+       {troop.units && troop.units.map( unit => {
+         return (
+             <Character  {...unit} key={unit.name}/>
+         )
+       })}
       </div>
     )
   }

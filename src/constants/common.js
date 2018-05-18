@@ -139,7 +139,148 @@ export const commonConstants = {
                     crit: 1
                 }
             ]
-        }
+        },
+        {
+            name: 'Elitaro',
+            units: [
+                {
+                    name: 'Konung I',
+                    img: 'images/avalon.png',
+                    health: 32,
+                    currentHealth: 32,
+                    revenge: 1,
+                    strength: 1,
+                    defense: 0,
+                    movement: 2,
+                    agility: 3,
+                    archery: 2,
+                    crit: 1
+                },
+                {
+                    name: 'Konung II',
+                    img: 'images/konung.png',
+                    health: 52,
+                    currentHealth: 52,
+                    revenge: 1,
+                    strength: 2,
+                    defense: 2,
+                    movement: 1,
+                    agility: 0,
+                    archery: 0,
+                    crit: 1
+                },
+                {
+                    name: 'Konung III',
+                    img: 'images/avalon.png',
+                    health: 32,
+                    currentHealth: 32,
+                    revenge: 1,
+                    strength: 1,
+                    defense: 0,
+                    movement: 2,
+                    agility: 3,
+                    archery: 2,
+                    crit: 1
+                },
+                {
+                    name: 'Konung IV',
+                    img: 'images/konung.png',
+                    health: 52,
+                    currentHealth: 52,
+                    revenge: 1,
+                    strength: 2,
+                    defense: 2,
+                    movement: 1,
+                    agility: 0,
+                    archery: 0,
+                    crit: 1
+                },
+                {
+                    name: 'Konung V',
+                    img: 'images/konung.png',
+                    health: 52,
+                    currentHealth: 52,
+                    revenge: 1,
+                    strength: 2,
+                    defense: 2,
+                    movement: 1,
+                    agility: 0,
+                    archery: 0,
+                    crit: 1
+                }
+            ]
+        },
+        {
+            name: 'dwarfes',
+            units: [
+                {
+                    name: 'Konung I',
+                    img: 'images/avalon.png',
+                    health: 32,
+                    currentHealth: 32,
+                    revenge: 1,
+                    strength: 1,
+                    defense: 0,
+                    movement: 2,
+                    agility: 3,
+                    archery: 2,
+                    crit: 1
+                },
+                {
+                    name: 'Konung II',
+                    img: 'images/konung.png',
+                    health: 52,
+                    currentHealth: 52,
+                    revenge: 1,
+                    strength: 2,
+                    defense: 2,
+                    movement: 1,
+                    agility: 0,
+                    archery: 0,
+                    crit: 1
+                },
+                {
+                    name: 'Konung III',
+                    img: 'images/avalon.png',
+                    health: 32,
+                    currentHealth: 32,
+                    revenge: 1,
+                    strength: 1,
+                    defense: 0,
+                    movement: 2,
+                    agility: 3,
+                    archery: 2,
+                    crit: 1
+                },
+                {
+                    name: 'Konung IV',
+                    img: 'images/konung.png',
+                    health: 52,
+                    currentHealth: 52,
+                    revenge: 1,
+                    strength: 2,
+                    defense: 2,
+                    movement: 1,
+                    agility: 0,
+                    archery: 0,
+                    crit: 1
+                },
+                {
+                    name: 'Konung V',
+                    img: 'images/konung.png',
+                    health: 52,
+                    currentHealth: 52,
+                    revenge: 1,
+                    strength: 2,
+                    defense: 2,
+                    movement: 1,
+                    agility: 0,
+                    archery: 0,
+                    crit: 1
+                }
+            ]
+        },
+
 
     ],
     DEFAULT_UNIT: {
@@ -155,148 +296,36 @@ export const commonConstants = {
         archery: 0,
         crit: 0
     },
-    WAR_DWARFES: [
-        {
-            name: 'Dwarf I',
-            img: 'images/troops/dwarf1',
-            health: 58,
-            currentHealth: 48,
-            revenge: 1,
-            strength: 3,
-            defense: 1,
-            movement: 2,
-            agility: 0,
-            archery: 0,
-            crit: 2,
-            weapon: ['K', 'A', 'P', 'MP']
+    DICES_ANGLES: {
+        1: {
+            x: -10,
+            y: -10,
+            z: 0
         },
-        {
-            name: 'Dwarf II',
-            img: 'images/troops/dwarf2',
-            health: 42,
-            currentHealth: 42,
-            revenge: 1,
-            strength: 2,
-            defense: 2,
-            movement: 2,
-            agility: 0,
-            archery: 0,
-            crit: 1,
-            weapon: ['K', 'A']
+        2: {
+            x: -10,
+            y: 260,
+            z: 0
         },
-        {
-            name: 'Dwarf III',
-            img: 'images/troops/dwarf3',
-            health: 46,
-            currentHealth: 46,
-            revenge: 2,
-            strength: 2,
-            defense: 0,
-            movement: 2,
-            agility: 1,
-            archery: 0,
-            crit: 3,
-            weapon: ['K', 'A', 'P', 'MP']
+        3: {
+            x: 80,
+            y: 0,
+            z: 10
         },
-        {
-            name: 'Dwarf IV',
-            img: 'images/troops/dwarf4',
-            health: 42,
-            currentHealth: 42,
-            revenge: 1,
-            strength: 2,
-            defense: 2,
-            movement: 2,
-            agility: 0,
-            archery: 0,
-            crit: 1,
-            weapon: ['K', 'A']
+        4: {
+            x: 260,
+            y: 0,
+            z: -10
         },
-        {
-            name: 'Dwarf V',
-            img: 'images/troops/dwarf5',
-            health: 42,
-            currentHealth: 42,
-            revenge: 1,
-            strength: 2,
-            defense: 2,
-            movement: 2,
-            agility: 0,
-            archery: 0,
-            crit: 1,
-            weapon: ['K', 'A']
+        5: {
+            x: 260,
+            y: 0,
+            z: 80
         },
-    ],
-    ELFS_ELITARO: [
-        {
-            name: 'Elitaro I',
-            img: 'images/troops/elitaro1',
-            health: 64,
-            currentHealth: 54,
-            revenge: 1,
-            strength: 3,
-            defense: 1,
-            movement: 2,
-            agility: 1,
-            archery: 0,
-            crit: 1,
-            weapon: ['K', 'A', 'P', 'MP']
-        },
-        {
-            name: 'Elitaro II',
-            img: 'images/troops/elitaro2',
-            health: 52,
-            currentHealth: 52,
-            revenge: 1,
-            strength: 3,
-            defense: 2,
-            movement: 1,
-            agility: 0,
-            archery: 0,
-            crit: 1,
-            weapon: ['K', 'A']
-        },
-        {
-            name: 'Elitaro III',
-            img: 'images/troops/elitaro3',
-            health: 52,
-            currentHealth: 52,
-            revenge: 1,
-            strength: 4,
-            defense: 1,
-            movement: 2,
-            agility: 0,
-            archery: 0,
-            crit: 2,
-            weapon: ['P', 'MP']
-        },
-        {
-            name: 'Elitaro IV',
-            img: 'images/troops/elitaro4',
-            health: 52,
-            currentHealth: 52,
-            revenge: 1,
-            strength: 2,
-            defense: 1,
-            movement: 1,
-            agility: 1,
-            archery: 0,
-            crit: 1,
-            weapon: ['P', 'MP']
-        },
-        {
-            name: 'Elitaro V',
-            img: 'images/troops/elitaro4',
-            health: 50,
-            currentHealth: 50,
-            revenge: 1,
-            strength: 1,
-            defense: 0,
-            movement: 3,
-            agility: 3,
-            archery: 2,
-            crit: 1,
-            weapon: ['K', 'A', 'P', 'MP']
-        },
-    ]
+        6: {
+            x: -10,
+            y: 170,
+            z: 90
+        }
+    }
 }

@@ -5,17 +5,17 @@ class TroopsList extends Component {
   render() {
     return (
       <ul>
-        {this.props.troops && this.props.troops.map( troop => {
+        {this.props.troops && Object.entries(this.props.troops).map( ([key, value]) => {
           return (
-            <li onClick={() => {
-              this.props.history.push(`troops/${troop.name}`);
+            <li key={key} onClick={() => {
+              this.props.history.push(`troops/${key}`);
             }}>
-              {troop.name}
-              <ul>
-                {troop.units && troop.units.map( unit =>(
-                  <li>{unit.name}</li>
+              {value.name}
+              {/* <ul>
+                {value.units && value.units.map( (unit, index) =>(
+                  <li key={index}>{unit.name}</li>
                 ))}
-              </ul>
+              </ul> */}
             </li>
           )
         })

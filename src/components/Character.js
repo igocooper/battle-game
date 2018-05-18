@@ -14,7 +14,7 @@ class Character extends Component {
     return (
         <div className='character'>
           <div>
-            <img src={ isDead ? 'images/dead.png' : this.props.img} alt=""/>
+            <img src={ isDead ? `${process.env.PUBLIC_URL}/images/dead.png` : `${process.env.PUBLIC_URL}/${this.props.img}`} alt=""/>
             <div className="health-bar">
               <div>
                 <span className="health-left" style={{width: `${healthPercent * 100}%`}}></span>
@@ -24,32 +24,32 @@ class Character extends Component {
           </div>
           <ul>
             <li>
-              <span className="icon">❤️</span>
-               Health: <span className='number hp'>{this.props.health}</span>
+              <div><span className="icon">❤️</span> Health: </div>
+               <div><span className='number hp'>{this.props.health}</span></div>
             </li>
             <li>
-              <span className="icon">🗡</span>
-               Strength: <span className='number'>{this.props.strength}</span>
+              <div> <span className="icon">🗡</span> Strength: </div>
+              <div><span className='number'>{this.props.strength}</span></div>
             </li>
             <li>
-              <span className="icon">🗡</span>
-               Critical Damage: <span className='number'>{this.props.crit}</span>
+              <div><span className="icon">⚔️</span> Critical Damage: </div> 
+               <div><span className='number'>{this.props.crit}</span></div>
             </li>
             <li>
-              <span className="icon">🛡</span>
-               Defense: <span className='number'>{this.props.defense}</span>
+              <div><span className="icon">🛡</span> Defense: </div>
+              <div><span className='number'>{this.props.defense}</span></div>
             </li>
             <li>
-              <span className="icon">🏇</span> 
-              Movement: <span className='number'>{this.props.movement}</span>
+             <div> <span className="icon">🏇</span> Movement: </div>
+             <div><span className='number'>{this.props.movement}</span></div>
             </li>
             <li>
-              <span className="icon">🐍</span>
-               Agility: <span className='number'>{this.props.agility}</span>
+              <div><span className="icon">🐍</span> Agility: </div>
+              <div><span className='number'>{this.props.agility}</span></div>
             </li>
             <li>
-              <span className="icon">🏹</span>
-             Archery: <span className='number'>{this.props.archery}</span>
+             <div> <span className="icon">🏹</span> Archery: </div>
+            <div><span className='number'>{this.props.archery}</span></div>
             </li>
           </ul>
         </div>

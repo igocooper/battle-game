@@ -10,10 +10,10 @@ import { commonConstants } from '../constants/common';
 const configureStore = () => {
 
     // const persistedState = loadState();
-    const persistedState = [...commonConstants.DEFAULT_TROOPS];
+    // const persistedState = [...commonConstants.DEFAULT_TROOPS];
     const store = createStore(
         troops,
-        persistedState,
+        // persistedState,
         composeWithDevTools(applyMiddleware(
             ReduxThunk
         ))

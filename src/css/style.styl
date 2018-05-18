@@ -1,0 +1,31 @@
+// Import all partials
+@require './_*.styl'
+
+body  
+  background #FFF
+  overflow hidden
+
+button
+ outline none !important
+
+button
+  cursor: pointer
+
+.board 
+  display: flex
+  background: #000
+  justify-content: space-around
+  align-items: center
+  // height 100vh
+  /* Portrait */
+  @media screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+        flex-direction: column
+  }
+
+.battle-menu
+    background #000
+    display: flex
+    justify-content center
+    align-items: center    
+
+     
