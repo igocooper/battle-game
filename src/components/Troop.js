@@ -8,7 +8,7 @@ export default class Troop extends Component {
       const troop = troopsConstants[this.props.match.params.id];
     return (
       <div className='troop'>
-       {troop.units && troop.units.map( unit => {
+       {troop && troop.units.map( unit => {
          return (
              <Character  {...unit} key={unit.name}/>
          )
