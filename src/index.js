@@ -12,7 +12,7 @@ const reduxStore = configureStore();
 
 ReactDOM.render(
     <Provider store = {reduxStore} >
-        <Router />
+        <Router/>
     </Provider>,
  document.getElementById('root'));
 registerServiceWorker();

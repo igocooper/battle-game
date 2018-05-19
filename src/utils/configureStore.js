@@ -2,7 +2,6 @@ import { applyMiddleware, createStore , compose } from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 import {saveState, loadState} from './localStorage.js';
 import root from '../reducers/root';
-import troops from '../reducers/troops';
 import throttle from 'lodash/throttle';
 import ReduxThunk from 'redux-thunk';
 import { commonConstants } from '../constants/common';
@@ -12,7 +11,7 @@ const configureStore = () => {
     // const persistedState = loadState();
     // const persistedState = [...commonConstants.DEFAULT_TROOPS];
     const store = createStore(
-        troops,
+        root,
         // persistedState,
         composeWithDevTools(applyMiddleware(
             ReduxThunk

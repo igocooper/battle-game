@@ -1,5 +1,5 @@
 import { troopsConstants } from '../constants/troops';
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 
 const initialState = {
     ...troopsConstants
@@ -8,8 +8,8 @@ const initialState = {
 const troops = ( state = initialState , action) => {
     switch(action.type) {
         case 'UPDATE_UNITS_IN_COMBAT':
-            const troop1 = _.cloneDeep(state[action.data.player1._troop_id]);
-            const troop2 = _.cloneDeep(state[action.data.player2._troop_id]);
+            const troop1 = cloneDeep(state[action.data.player1._troop_id]);
+            const troop2 = cloneDeep(state[action.data.player2._troop_id]);
             let unit1Index;
             let unit2Index;
 

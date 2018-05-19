@@ -54,7 +54,7 @@ class BattleMenu extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        troops: state
+        troops: state.troops
     }
 }
 

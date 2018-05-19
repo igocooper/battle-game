@@ -1,16 +1,14 @@
 import React, { Component, Fragment } from 'react';
+import MainMenu from './MainMenu';
+import Router from './Router';
+
 
 class App extends Component {
-  state = {
-    header: 'header'
-  };
-
   render() {
     return (
       <Fragment>
-        <div>
-          Hello. I'm App.
-        </div>
+       
+        
       </Fragment>
     );
   }

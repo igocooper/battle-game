@@ -1,45 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Table } from 'semantic-ui-react';
 
-class TroopsList extends Component {
-  render() {
+
+const TroopsList = (props) => {
     return (
-      <ul>
-        {this.props.troops && Object.entries(this.props.troops).map( ([key, value]) => {
-          return (
-            <li key={key} onClick={() => {
-              this.props.history.push(`troops/${key}`);
-            }}>
-              {value.name}
-              {/* <ul>
-                {value.units && value.units.map( (unit, index) =>(
-                  <li key={index}>{unit.name}</li>
-                ))}
-              </ul> */}
-            </li>
-          )
-        })
-        }
-      </ul>
+      <Table celled inverted selectable>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Name</Table.HeaderCell>
+            <Table.HeaderCell>Units</Table.HeaderCell>
+            <Table.HeaderCell>Total Health</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+
+        <Table.Body>
+          {props.troops && Object.entries(props.troops).map( ([key, value]) => {
+            const totalHealth = value.units.reduce( (total, unit) => total += unit.health, 0);
+            const units = value.units.length;
+              return (
+                <Table.Row key={key} onClick={() => props.history.push(`troops/${key}`)}>
+                  <Table.Cell>
+                    {value.name}
+                  </Table.Cell>
+                  <Table.Cell>
+                    {units}
+                  </Table.Cell>
+                  <Table.Cell>
+                    {totalHealth}
+                  </Table.Cell>
+                </Table.Row>
+              )
+          })}
+        </Table.Body>
+    </Table>
     );
-  }
 }
 
-const mapStateToProps = (state) => {
-  return {
-      troops: state
-  }
-};
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         onTodoClick: (id) => {
-//             dispatch( toggleTodoAction(id));
-
-//         }
-//     }
-// };
-
-export default connect(
-mapStateToProps,
-null)(TroopsList);
+export default TroopsList;
