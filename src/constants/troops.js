@@ -829,5 +829,135 @@ export const troopsConstants = {
                 weapon: [ 'P', 'MP']
             }
         ]
+    },
+    WAREWOLVES: {
+        name: `Warewolves`,
+        units: [
+            {
+                name: 'Warewolf I',
+                img: 'images/troops/warewolf1.png',
+                _troop_id: 'WAREWOLVES',
+                health: 68,
+                currentHealth: 68,
+                revenge: 1,
+                strength: 3,
+                defense: 1,
+                movement: 6,
+                agility: 2,
+                archery: 0,
+                crit: 3,
+                weapon: []
+            },
+            {
+                name: 'Warewolf II',
+                img: 'images/troops/warewolf2.png',
+                _troop_id: 'WAREWOLVES',
+                health: 52,
+                currentHealth: 52,
+                revenge: 2,
+                strength: 4,
+                defense: 2,
+                movement: 4,
+                agility: 2,
+                archery: 0,
+                crit: 1,
+                weapon: []
+            },
+            {
+                name: 'Warewolf III',
+                img: 'images/troops/warewolf3.png',
+                _troop_id: 'WAREWOLVES',
+                health: 48,
+                currentHealth: 48,
+                revenge: 1,
+                strength: 4,
+                defense: 1,
+                movement: 5,
+                agility: 2,
+                archery: 0,
+                crit: 2,
+                weapon: []
+            },
+            {
+                name: 'Warewolf III',
+                img: 'images/troops/warewolf4.png',
+                _troop_id: 'WAREWOLVES',
+                health: 52,
+                currentHealth: 52,
+                revenge: 1,
+                strength: 4,
+                defense: 2,
+                movement: 4,
+                agility: 2,
+                archery: 0,
+                crit: 1,
+                weapon: []
+            },
+        ]
+    },
+    KENTAVERS: {
+        name: `Kentavres`,
+        units: [
+            {
+                name: 'Kentavr I',
+                img: 'images/troops/kentavr1.png',
+                _troop_id: 'KENTAVERS',
+                health: 80,
+                currentHealth: 80,
+                revenge: 4,
+                strength: 5,
+                defense: 2,
+                movement: 6,
+                agility: 0,
+                archery: 0,
+                crit: 2,
+                weapon: []
+            },
+            {
+                name: 'Kentavr II',
+                img: 'images/troops/kentavr2.png',
+                _troop_id: 'KENTAVERS',
+                health: 68,
+                currentHealth: 68,
+                revenge: 4,
+                strength: 3,
+                defense: 2,
+                movement: 5,
+                agility: 0,
+                archery: 2,
+                crit: 2,
+                weapon: []
+            },
+            {
+                name: 'Kentavr III',
+                img: 'images/troops/kentavr3.png',
+                _troop_id: 'KENTAVERS',
+                health: 66,
+                currentHealth: 66,
+                revenge: 4,
+                strength: 4,
+                defense: 2,
+                movement: 6,
+                agility: 0,
+                archery: 0,
+                crit: 2,
+                weapon: []
+            },
+            {
+                name: 'Kentavr IV',
+                img: 'images/troops/kentavr4.png',
+                _troop_id: 'KENTAVERS',
+                health: 66,
+                currentHealth: 66,
+                revenge: 4,
+                strength: 4,
+                defense: 2,
+                movement: 6,
+                agility: 0,
+                archery: 0,
+                crit: 2,
+                weapon: []
+            },
+        ]
     }
 } 

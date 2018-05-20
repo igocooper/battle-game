@@ -49,8 +49,20 @@ class Character extends Component {
             </li>
             <li>
              <div> <span className="icon">🏹</span> Archery: </div>
-            <div><span className='number'>{this.props.archery}</span></div>
+             <div><span className='number'>{this.props.archery}</span></div>
             </li>
+            <li>
+              <div> <span className="icon">👿</span> Revenge: </div>
+              <div><span className='number'>{this.props.revenge}</span></div>
+            </li>
+            {this.props.weapon &&
+            <Fragment>
+              <li>
+                <div> <span className="icon">💣</span> Weapon: {this.props.weapon.join('; ')}</div>
+                <div><span className='number'></span></div>
+              </li>
+            </Fragment>
+            }
           </ul>
         </div>
     )
@@ -58,16 +70,17 @@ class Character extends Component {
 }
 
 Character.defaultProps = {
-  troop: 'Konung',
-  img: 'images/konung.png',
-  health: 52,
-  currentHealth: 12,
-  strength: 2,
-  defense: 2,
-  movement: 1,
+  name: 'Sample',
+  img: 'images/character_sample.png',
+  health: 1,
+  currentHealth: 1,
+  strength: 0,
+  defense: 0,
+  movement: 0,
   agility: 0,
   archery: 0,
-  crit: 0
+  crit: 0,
+  revenge: 0
 }
 
 export default Character;

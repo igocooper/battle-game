@@ -15,7 +15,7 @@ export default class MainMenu extends Component {
     const { active } = this.props.menu
 
     return (
-      <Menu stackable inverted  >
+      <Menu stackable inverted >
         <Menu.Item>
           <img src={`${process.env.PUBLIC_URL}/images/logo.png`} />
         </Menu.Item>

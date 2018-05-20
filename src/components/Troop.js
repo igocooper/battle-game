@@ -10,7 +10,7 @@ export default class Troop extends Component {
       <div className='troop'>
        {troop && troop.units.map( unit => {
          return (
-             <Character  {...unit} key={unit.name}/>
+             <Character  {...unit} key={unit.name} weapoon={true}/>
          )
        })}
       </div>
