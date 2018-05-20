@@ -10,7 +10,7 @@ export default class Controls extends Component {
           <a href="#" 
             className="btn-two red mini" 
             onClick={ () => {
-            this.props.attack(this.props.player, this.props.hits);
+            this.props.attack(this.props.player, this.props.playerId);
             }}>
           🗡 Attack
           </a>
@@ -18,7 +18,7 @@ export default class Controls extends Component {
           <a href="#" 
             className="btn-two blue mini" 
             onClick={ () => {
-            this.props.defense(this.props.player, this.props.hits);
+            this.props.defense(this.props.player, this.props.playerId);
             }}>
           🛡 Defense
           </a>
@@ -30,7 +30,7 @@ export default class Controls extends Component {
           <a href="#" 
             className="btn-two green mini" 
             onClick={ () => {
-            this.props.shoot(this.props.player, this.props.hits);
+            this.props.shoot(this.props.player, this.props.hitplayerIds);
             }}>
           🎯 Shoot
           </a>

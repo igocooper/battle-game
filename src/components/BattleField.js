@@ -15,14 +15,6 @@ import BattleMenu from './BattleMenu';
 import { connect } from 'react-redux';
 
 class BattleField extends Component {
-    state = {
-        players: {
-            player1: null,
-            player2: null,
-        },
-        player1Hits: {},
-        player2Hits: {}
-    };
 
     roll = () => {
         // play audio
@@ -63,39 +55,19 @@ class BattleField extends Component {
 
       attack = (attacker, whoIsAttacking ) => {
         const dicesResults = this.roll();
-
         this.props.attack(attacker, dicesResults, whoIsAttacking);
-
-        // TODO: remove local state update
-        this.setState({
-            [whoIsAttacking]: calculateAttack(attacker, dicesResults)
-        });
       };
 
       shoot = (attacker, whoIsAttacking ) => {
         const dicesResults = this.roll();
-
         this.props.attack(attacker, dicesResults, whoIsAttacking, true);
-
-        // TODO: remove local state update
-        this.setState({
-            [whoIsAttacking]: calculateAttack(attacker, dicesResults, true)
-        });
       };
 
       defense = (defencingPlayer, whoIsDefencing ) => {
         const dicesResults = this.roll();
 
         this.props.defense(defencingPlayer, dicesResults, whoIsDefencing);
-
-        // TODO: remove local state update
-        this.setState({
-            [whoIsDefencing]: calculateDefense(defencingPlayer, dicesResults)
-        });
-       setTimeout( () => {
-           this.calculateDamage();
-           this.props.updateUnitsInCombat(this.state.players.player1,this.state.players.player2);
-        }, 2000 );
+        this.props.applyDamage();
       };
 
       heal = (heal, target) => {
@@ -129,97 +101,27 @@ class BattleField extends Component {
          }, 2000 );
       }
 
-      calculateDamage = () => {
-        const player1Hits= this.state.player1Hits;
-        const player2Hits = this.state.player2Hits;
-
-        if (player1Hits.attack === undefined || player2Hits.attack === undefined) {
-            console.error('One or more players had not made their move');
-            return
-        }
-
-        // calculate damage done by player 2 to player 1
-        const player1DamageReceived = calculateDamage(player2Hits,player1Hits);
-        // calculate damage done by player 1 to player 2
-        const player2DamageReceived = calculateDamage(player1Hits,player2Hits);
-
-        // copy players
-        const player1 = {...this.state.players.player1};
-        const player2 = {...this.state.players.player2};
-
-        // update revenge count
-        player1.currentRevenge = player1Hits.revenge;
-        player2.currentRevenge = player2Hits.revenge;
-
-        // predict defender death to prevent revenge damage
-        var isPlayer1Dead = false;
-        var isPlayer2Dead = false;
-
-        // if player 1 is Attacker
-        if ( player1Hits.attacking ) {
-            isPlayer2Dead = player2.currentHealth - player2DamageReceived <= 0;
-        }
-
-        // if player 2 is Attacker
-        if ( player2Hits.attacking ) {
-            isPlayer1Dead = player1.currentHealth - player1DamageReceived <= 0;
-        }
-
-        // apply damage & modify health
-        if ( !isPlayer2Dead && !player1Hits.shooting) {
-            player1.currentHealth = player1.currentHealth - player1DamageReceived;
-        }
-
-        if ( !isPlayer1Dead && !player2Hits.shooting) {
-            player2.currentHealth = player2.currentHealth - player2DamageReceived;
-        }
-
-        this.setState({
-            players : {
-                ...this.state.players,
-                player1,
-                player2
-            },
-            player1Hits: {},
-            player2Hits: {}
-        })
-
-      };
-
       setPlayer = (player, whichPlayer) => {
-        this.setState({
-            players: {
-                ...this.state.players,
-                [whichPlayer] : player
-            }
-        });
+        this.props.setPlayer(player, whichPlayer);
       };
 
       finishBattle = () => {
         this.props.updateUnitsInCombat(this.state.players.player1,this.state.players.player2);
         this.props.resetAllUnitsRevenge();
         
-        // reset state
-        this.setState({
-            players : {
-                player1: null,
-                player2: null
-            },
-            player1Hits: {},
-            player2Hits: {}
-        })
       }
 
     render() {
+        const { player1, player2 }  = this.props.battlefield.players; 
+        const { player1: player1Hits, player2: player2Hits } = this.props.battlefield.hits;
         return ( 
         <Fragment>     
             <div className="board">
                 <div>
-                    <Character {...this.state.players.player1}/>
+                    <Character {...player1}/>
                     <Controls 
-                        player={this.state.players.player1} 
-                        hits='player1Hits'
-                        who='player1'
+                        player={player1} 
+                        playerId='player1'
                         attack={this.attack} 
                         defense={this.defense} 
                         heal={this.heal} 
@@ -229,16 +131,15 @@ class BattleField extends Component {
                 <div>
                 <Dices roll={this.roll}/>
                 <Info 
-                    player1Hits={this.state.player1Hits}
-                    player2Hits={this.state.player2Hits}
+                    player1Hits={player1Hits}
+                    player2Hits={player2Hits}
                 />
                 </div>
                 <div>
-                    <Character {...this.state.players.player2}/>
+                    <Character {...player2}/>
                     <Controls 
-                        player={this.state.players.player2} 
-                        hits='player2Hits'
-                        who='player2'
+                        player={player2} 
+                        playerId='player2'
                         attack={this.attack} 
                         defense={this.defense} 
                         heal={this.heal} 

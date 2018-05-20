@@ -16,7 +16,7 @@ class HealButton extends Component {
               trigger={
                 <a href="#" 
                   className="btn-two yellow mini" 
-                  onClick={() => this.props.heal(this.state.healing, this.props.who)}
+                  onClick={() => this.props.heal(this.state.healing, this.props.playerId)}
                   > 
                   ❤️ Healing
                 </a>}

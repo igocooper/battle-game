@@ -48,12 +48,18 @@ export function defense(defencingPlayer, dicesResults, whoIsDefencing) {
     }
 };
 
-export function applyDamage(player1, player2) {
+export function applyDamage() {
     return {
-        type: 'APPLY_DAMAGE',
-        data: {
-            player1,
-            player2
-        }
+        type: 'APPLY_DAMAGE'
     }
 };
+
+export function setPlayer(player, whichPlayer) {
+    return {
+        type: 'SET_PLAYER',
+        data: {
+            player,
+            whichPlayer
+        }
+    }
+}

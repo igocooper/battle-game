@@ -7,27 +7,47 @@ const initialState = {
         player1: null,
         player2: null,
     },
-    player1Hits: {},
-    player2Hits: {}
+    hits: {
+        player1: {},
+        player2: {}
+    }
 };
 
 const battlefield = ( state = initialState , action) => {
     switch(action.type) {
+        case 'SET_PLAYER':
+            return {
+                ...state,
+                players: {
+                    ...state.players,
+                    [action.data.whichPlayer]: action.data.player
+                }
+            }
         case 'ATTACK':
             return {
                 ...state,
-                [action.data.whoIsAttacking] : calculateAttack(action.data.attacker, action.data.dicesResults, action.data.isShooting)
+                hits: {
+                    ...state.hits,
+                    [action.data.whoIsAttacking] : calculateAttack(action.data.attacker, action.data.dicesResults, action.data.isShooting)
+                }
             };
 
         case 'DEFENSE':
             return {
                 ...state,
-                [action.data.whoIsDefencing] : calculateDefense(action.data.defencingPlayer, action.data.dicesResults)
+                hits: {
+                    ...state.hits,
+                    [action.data.whoIsDefencing] : calculateDefense(action.data.defencingPlayer, action.data.dicesResults)
+                }
         };
 
         case 'APPLY_DAMAGE':
-            const player1Hits= this.state.player1Hits;
-            const player2Hits = this.state.player2Hits;
+            const player1Hits = state.hits.player1;
+            const player2Hits = state.hits.player2;
+            const player1 = {...state.players.player1};
+            const player2 = {...state.players.player2};
+
+            console.log(player2);
 
             if (player1Hits.attack === undefined || player2Hits.attack === undefined) {
                 console.error('One or more players had not made their move');
@@ -38,10 +58,6 @@ const battlefield = ( state = initialState , action) => {
             const player1DamageReceived = calculateDamage(player2Hits,player1Hits);
             // calculate damage done by player 1 to player 2
             const player2DamageReceived = calculateDamage(player1Hits,player2Hits);
-
-            // copy players
-            const player1 = {...this.state.players.player1};
-            const player2 = {...this.state.players.player2};
 
             // update revenge count
             player1.currentRevenge = player1Hits.revenge;
@@ -71,7 +87,11 @@ const battlefield = ( state = initialState , action) => {
             }
 
             return {
-                ...state
+                ...state,
+                players: {
+                    player1,
+                    player2
+                }
             }
 
         default :
