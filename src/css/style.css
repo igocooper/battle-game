@@ -761,3 +761,6 @@ button {
       -ms-flex-align: center;
           align-items: center;
 }
+.modification-popup span {
+  margin-left: 10px;
+}

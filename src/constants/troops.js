@@ -805,6 +805,9 @@ export const troopsConstants = {
                 img: 'images/troops/konung1.png',
                 _troop_id: 'KONUNG',
                 health: 50,
+                modification: {
+                    agility: 6
+                },
                 currentHealth: 50,
                 revenge: 1,
                 currentRevenge: 1,

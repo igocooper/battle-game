@@ -1,4 +1,12 @@
 export function calculateAttack(attacker, dicesResults, shooting = false) {
+    // apply buffs and curses
+    if (attacker.modification) {
+        attacker = {
+            ...attacker,
+            ...attacker.modification
+        };
+    }
+
     const crit =  dicesResults.crit >= (7 - attacker.crit);
     const attack = crit ?
     (dicesResults.attack * 2) + attacker.strength :
@@ -17,6 +25,14 @@ export function calculateAttack(attacker, dicesResults, shooting = false) {
 };
 
 export function calculateDefense(defencingPlayer, dicesResults) {
+    // apply buffs and curses
+    if (defencingPlayer.modification) {
+        defencingPlayer = {
+            ...defencingPlayer,
+            ...defencingPlayer.modification
+        }
+    } 
+
     const luck = dicesResults.luck === 6;
     const crit = dicesResults.crit >= (7 - defencingPlayer.crit);
     let attack = dicesResults.attack + defencingPlayer.strength;
@@ -43,7 +59,7 @@ export function calculateDamage(attacker, defencer) {
     if (defencer.dodge) {
         defencerDamage = 0;
     }
-    // if attacker has luck he omits defencer armor
+    // if attacker has luck he omits defencer armor and hits dodgers
     if (attacker.luck) {
         defencerDamage = attacker.attack;
     }

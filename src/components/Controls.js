@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import HealButton from './HealButton';
+import ModifyButton from './ModifyButton';
 
 export default class Controls extends Component {
   render() {
@@ -33,13 +34,7 @@ export default class Controls extends Component {
             }}>
           🎯 Shoot
           </a>
-          <a href="#" 
-            className="btn-two cyan mini" 
-            onClick={ () => {
-              console.log('nothing has been done');
-            }}>
-         ⚙️ modify
-          </a>
+          <ModifyButton />
         </div>
 
       </Fragment>
