@@ -82,20 +82,35 @@ class BattleField extends Component {
         }, 2000 );
       };
 
-      round = () => {
+      heal = (heal, target) => {
            // copy players
         const player1 = {...this.state.players.player1};
         const player2 = {...this.state.players.player2};
+
+        switch(target) {
+            case 'player1':
+            var health = player1.currentHealth += heal;
+            // prevent healing more then max hp
+            player1.currentHealth = health > player1.health ? player1.health : health;
+            break;
+            case 'player2':
+            var health = player2.currentHealth += heal;
+             // prevent healing more then max hp
+             player2.currentHealth = health > player2.health ? player2.health : health;
+            break; 
+        }
         
         this.setState({
             players : {
                 ...this.state.players,
                 player1,
                 player2
-            },
-            player1Hits: {},
-            player2Hits: {}
-        })
+            }
+        });
+
+        setTimeout( () => {
+            this.props.updateUnitsInCombat(this.state.players.player1,this.state.players.player2);
+         }, 2000 );
       }
 
       calculateDamage = () => {
@@ -188,9 +203,10 @@ class BattleField extends Component {
                     <Controls 
                         player={this.state.players.player1} 
                         hits='player1Hits'
+                        who='player1'
                         attack={this.attack} 
                         defense={this.defense} 
-                        round={this.round} 
+                        heal={this.heal} 
                     />
                 </div>
                 <div>
@@ -205,9 +221,10 @@ class BattleField extends Component {
                     <Controls 
                         player={this.state.players.player2} 
                         hits='player2Hits'
+                        who='player2'
                         attack={this.attack} 
                         defense={this.defense} 
-                        round={this.round} 
+                        heal={this.heal} 
                     />
                 </div>
                 <audio ref={(element) => { this.audio = element; }} src={`${process.env.PUBLIC_URL}/sounds/dice.mp3`}></audio>
