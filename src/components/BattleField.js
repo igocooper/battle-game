@@ -59,30 +59,38 @@ class BattleField extends Component {
         });
 
         return results
-      
       };
 
-      attack = (attacker, who ) => {
+      attack = (attacker, whoIsAttacking ) => {
         const dicesResults = this.roll();
 
+        this.props.attack(attacker, dicesResults, whoIsAttacking);
+
+        // TODO: remove local state update
         this.setState({
-            [who]: calculateAttack(attacker, dicesResults)
+            [whoIsAttacking]: calculateAttack(attacker, dicesResults)
         });
       };
 
-      shoot = (attacker, who ) => {
+      shoot = (attacker, whoIsAttacking ) => {
         const dicesResults = this.roll();
 
+        this.props.attack(attacker, dicesResults, whoIsAttacking, true);
+
+        // TODO: remove local state update
         this.setState({
-            [who]: calculateAttack(attacker, dicesResults, true)
+            [whoIsAttacking]: calculateAttack(attacker, dicesResults, true)
         });
       };
 
-      defense = (defencingPlayer, who ) => {
+      defense = (defencingPlayer, whoIsDefencing ) => {
         const dicesResults = this.roll();
 
+        this.props.defense(defencingPlayer, dicesResults, whoIsDefencing);
+
+        // TODO: remove local state update
         this.setState({
-            [who]: calculateDefense(defencingPlayer, dicesResults)
+            [whoIsDefencing]: calculateDefense(defencingPlayer, dicesResults)
         });
        setTimeout( () => {
            this.calculateDamage();
@@ -245,16 +253,5 @@ class BattleField extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        troops: state.troops,
-        menu: state.menu
-    }
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators(actionCreators, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(BattleField);
+export default BattleField;
 

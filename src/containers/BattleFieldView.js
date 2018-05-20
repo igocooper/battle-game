@@ -20,7 +20,8 @@ class BattleFieldView extends Component {
 const mapStateToProps = (state) => {
     return {
         troops: state.troops,
-        menu: state.menu
+        menu: state.menu,
+        battlefield: state.battlefield
     }
 };
 

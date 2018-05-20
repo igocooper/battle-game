@@ -22,3 +22,38 @@ export function resetAllUnitsRevenge() {
         type: 'RESET_ALL_UNITS_REVENGE'
     }
 };
+
+// BATTLEFIELD
+
+export function attack(attacker, dicesResults, whoIsAttacking, isShooting = false) {
+    return {
+        type: 'ATTACK',
+        data: {
+            attacker,
+            dicesResults,
+            whoIsAttacking,
+            isShooting
+        }
+    }
+};
+
+export function defense(defencingPlayer, dicesResults, whoIsDefencing) {
+    return {
+        type: 'DEFENSE',
+        data: {
+            defencingPlayer,
+            dicesResults,
+            whoIsDefencing,
+        }
+    }
+};
+
+export function applyDamage(player1, player2) {
+    return {
+        type: 'APPLY_DAMAGE',
+        data: {
+            player1,
+            player2
+        }
+    }
+};
