@@ -30,11 +30,28 @@ const troops = ( state = initialState , action) => {
             troop1.units[unit1Index].currentHealth = action.data.player1.currentHealth;
             troop2.units[unit2Index].currentHealth = action.data.player2.currentHealth;
 
+            // update currentRevenge
+            troop1.units[unit1Index].currentRevenge = action.data.player1.currentRevenge;
+            troop2.units[unit2Index].currentRevenge = action.data.player2.currentRevenge;
+
             return {
                 ...state,
                 [action.data.player1._troop_id] : troop1,
                 [action.data.player2._troop_id] : troop2,
             }
+
+            case 'RESET_ALL_UNITS_REVENGE':
+            const currentState = cloneDeep(state);
+            
+            // map through each and set it's current revenge to revenge
+            Object.entries(currentState).forEach( ( [key, value] ) => {
+                value.units.forEach( (unit, unitIndex) => {
+                    const revenge = unit.revenge;
+                    currentState[key].units[unitIndex].currentRevenge = revenge;
+                });
+            });
+
+            return currentState;
         default :
             return state;
     }

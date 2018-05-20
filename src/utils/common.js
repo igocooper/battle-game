@@ -10,7 +10,7 @@ export function calculateAttack(attacker, dicesResults) {
         dodge: dicesResults.dodge >= (7 - attacker.agility),
         luck: dicesResults.luck === 6,
         crit: crit,
-        revenge: attacker.revenge,
+        revenge: attacker.currentRevenge,
         attacking: true
     }
 };
@@ -25,12 +25,12 @@ export function calculateDefense(defencingPlayer, dicesResults) {
     }
 
     return {
-        attack: defencingPlayer.revenge ? attack : luck ? attack : 0,
+        attack: defencingPlayer.currentRevenge ? attack : luck ? attack : 0,
         block: defencingPlayer.defense ? dicesResults.block + defencingPlayer.defense : 0,
         crit: crit,
         dodge: dicesResults.dodge >= (7 - defencingPlayer.agility),
         luck: false,
-        revenge: defencingPlayer.revenge > 0 ? defencingPlayer.revenge - 1 : defencingPlayer.revenge,
+        revenge: defencingPlayer.currentRevenge > 0 ? defencingPlayer.currentRevenge - 1 : defencingPlayer.currentRevenge,
         attacking: false
     }
 };

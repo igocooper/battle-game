@@ -16,3 +16,9 @@ export function setActiveMenu(active) {
        }
     }
 };
+
+export function resetAllUnitsRevenge() {
+    return {
+        type: 'RESET_ALL_UNITS_REVENGE'
+    }
+};

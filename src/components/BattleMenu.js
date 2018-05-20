@@ -45,7 +45,7 @@ class BattleMenu extends Component {
     return (
         <div className='battle-menu'>
             <SelectPlayer {...this.props} whichPlayer='player1'/>
-            <button onClick={this.props.finishBattle} className="btn-two green small"> ⌛️ Finish Battle</button>
+            <button onClick={this.props.finishBattle} className="btn-two green small"> ⌛️ Finish Round</button>
             <SelectPlayer {...this.props} whichPlayer='player2'/>
         </div> 
     )

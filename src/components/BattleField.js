@@ -19,32 +19,6 @@ class BattleField extends Component {
         players: {
             player1: null,
             player2: null,
-            player3: {
-                troop: 'Konung',
-                img: 'images/konung.png',
-                health: 52,
-                currentHealth: 52,
-                revenge: 1,
-                strength: 2,
-                defense: 2,
-                movement: 1,
-                agility: 0,
-                archery: 0,
-                crit: 1
-            },
-            player4: {
-                troop: 'Avalon',
-                img: 'images/avalon.png',
-                health: 32,
-                currentHealth: 32,
-                revenge: 1,
-                strength: 1,
-                defense: 0,
-                movement: 2,
-                agility: 3,
-                archery: 2,
-                crit: 1
-              },
         },
         player1Hits: {},
         player2Hits: {}
@@ -112,9 +86,6 @@ class BattleField extends Component {
            // copy players
         const player1 = {...this.state.players.player1};
         const player2 = {...this.state.players.player2};
-
-        player1.revenge = 1;
-        player2.revenge = 1;
         
         this.setState({
             players : {
@@ -146,8 +117,8 @@ class BattleField extends Component {
         const player2 = {...this.state.players.player2};
 
         // update revenge count
-        player1.revenge = player1Hits.revenge;
-        player2.revenge = player2Hits.revenge;
+        player1.currentRevenge = player1Hits.revenge;
+        player2.currentRevenge = player2Hits.revenge;
 
         // predict defender death to prevent revenge damage
         var isPlayer1Dead = false;
@@ -195,6 +166,17 @@ class BattleField extends Component {
 
       finishBattle = () => {
         this.props.updateUnitsInCombat(this.state.players.player1,this.state.players.player2);
+        this.props.resetAllUnitsRevenge();
+        
+        // reset state
+        this.setState({
+            players : {
+                player1: null,
+                player2: null
+            },
+            player1Hits: {},
+            player2Hits: {}
+        })
       }
 
     render() {
