@@ -102,7 +102,10 @@ class BattleField extends Component {
         this.setState({
             [who]: calculateDefense(defencingPlayer, dicesResults)
         });
-       setTimeout( this.calculateDamage, 2000 )
+       setTimeout( () => {
+           this.calculateDamage();
+           this.props.updateUnitsInCombat(this.state.players.player1,this.state.players.player2);
+        }, 2000 );
       };
 
       round = () => {
