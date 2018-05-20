@@ -70,6 +70,14 @@ class BattleField extends Component {
         });
       };
 
+      shoot = (attacker, who ) => {
+        const dicesResults = this.roll();
+
+        this.setState({
+            [who]: calculateAttack(attacker, dicesResults, true)
+        });
+      };
+
       defense = (defencingPlayer, who ) => {
         const dicesResults = this.roll();
 
@@ -149,12 +157,12 @@ class BattleField extends Component {
             isPlayer1Dead = player1.currentHealth - player1DamageReceived <= 0;
         }
 
-        // modify health
-        if ( !isPlayer2Dead ) {
+        // apply damage & modify health
+        if ( !isPlayer2Dead && !player1Hits.shooting) {
             player1.currentHealth = player1.currentHealth - player1DamageReceived;
         }
 
-        if ( !isPlayer1Dead ) {
+        if ( !isPlayer1Dead && !player2Hits.shooting) {
             player2.currentHealth = player2.currentHealth - player2DamageReceived;
         }
 
@@ -207,6 +215,7 @@ class BattleField extends Component {
                         attack={this.attack} 
                         defense={this.defense} 
                         heal={this.heal} 
+                        shoot={this.shoot}
                     />
                 </div>
                 <div>
@@ -225,6 +234,7 @@ class BattleField extends Component {
                         attack={this.attack} 
                         defense={this.defense} 
                         heal={this.heal} 
+                        shoot={this.shoot}
                     />
                 </div>
                 <audio ref={(element) => { this.audio = element; }} src={`${process.env.PUBLIC_URL}/sounds/dice.mp3`}></audio>

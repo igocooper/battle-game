@@ -1,4 +1,4 @@
-export function calculateAttack(attacker, dicesResults) {
+export function calculateAttack(attacker, dicesResults, shooting = false) {
     const crit =  dicesResults.crit >= (7 - attacker.crit);
     const attack = crit ?
     (dicesResults.attack * 2) + attacker.strength :
@@ -11,7 +11,8 @@ export function calculateAttack(attacker, dicesResults) {
         luck: dicesResults.luck === 6,
         crit: crit,
         revenge: attacker.currentRevenge,
-        attacking: true
+        attacking: true,
+        shooting: shooting
     }
 };
 

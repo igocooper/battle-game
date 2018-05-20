@@ -16,11 +16,12 @@ export default class MainMenu extends Component {
 
     return (
       <Menu stackable inverted >
-        <Menu.Item>
+        <Menu.Item as="span">
           <img src={`${process.env.PUBLIC_URL}/images/logo.png`} />
         </Menu.Item>
 
         <Menu.Item
+          as="span"
           name='troops'
           active={active === 'troops'}
           onClick={this.handleItemClick}
@@ -29,6 +30,7 @@ export default class MainMenu extends Component {
         </Menu.Item>
 
         <Menu.Item
+          as="span"
           name='battleField'
           active={active === 'battleField'}
           onClick={this.handleItemClick}
