@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actionCreators from '../actions/index';
+import { bindActionCreators } from 'redux';
+import { troopsConstants } from '../constants/troops';
 
 import { Header, Button, Popup, Grid, Dropdown, Menu } from 'semantic-ui-react'
 
@@ -12,25 +15,15 @@ class SelectPlayer extends Component {
     render() {
         return (
             <Popup
-                trigger={<button className="btn-two blue small" > 🎲 Select {this.props.whichPlayer}</button>}
+                trigger={<button className="btn-two blue small" > 🎲 Select Troops</button>}
                 flowing
                 hoverable
+                on='click'
             >
                 <Menu secondary vertical>
-                    {this.props.troops && Object.keys(this.props.troops).map( (troop, troopIndex) => {
+                    {troopsConstants && Object.entries(troopsConstants).map( ( [key, troop] ) => {
                         return (
-                        <Dropdown item text={troop} key={troopIndex}>
-                            <Dropdown.Menu>
-                                <Dropdown.Header>Select Unit</Dropdown.Header>
-                                {this.props.troops[troop] && this.props.troops[troop].units.map( (unit, index) => {
-                                    return (
-                                        <Dropdown.Item key={index} onClick={ () => this.handlePlayerSelect(unit)}>
-                                            {unit.name} {index === 0 ? '💀' : '☠️' }
-                                        </Dropdown.Item>
-                                    )
-                                })} 
-                            </Dropdown.Menu>
-                        </Dropdown>
+                            <Menu.Item name={troop.name} key={key} onClick={ () => this.props.addTroop(troop, key)} />
                         )
                     })}
                 </Menu>
@@ -44,9 +37,8 @@ class BattleMenu extends Component {
   render() {
     return (
         <div className='battle-menu'>
-            <SelectPlayer {...this.props} whichPlayer='player1'/>
+            <SelectPlayer {...this.props} />
             <button onClick={this.props.finishBattle} className="btn-two green small"> ⌛️ Finish Round</button>
-            <SelectPlayer {...this.props} whichPlayer='player2'/>
         </div> 
     )
   }
@@ -54,8 +46,13 @@ class BattleMenu extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        troops: state.troops
+        troops: state.troops,
+        battlefield: state.battlefield
     }
 }
 
-export default connect(mapStateToProps, null)(BattleMenu);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators(actionCreators, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BattleMenu);

@@ -2,7 +2,7 @@ import { troopsConstants } from '../constants/troops';
 import cloneDeep from 'lodash/cloneDeep';
 
 const initialState = {
-    ...troopsConstants
+    // ...troopsConstants
 };
 
 const troops = ( state = initialState , action) => {
@@ -40,8 +40,8 @@ const troops = ( state = initialState , action) => {
                 [action.data.player2._troop_id] : troop2,
             }
 
-            case 'RESET_ALL_UNITS_REVENGE':
-            const currentState = cloneDeep(state);
+        case 'RESET_ALL_UNITS_REVENGE':
+            var currentState = cloneDeep(state);
             
             // map through each and set it's current revenge to revenge
             Object.entries(currentState).forEach( ( [key, value] ) => {
@@ -52,6 +52,13 @@ const troops = ( state = initialState , action) => {
             });
 
             return currentState;
+
+        case 'ADD_TROOP':
+            var currentState = cloneDeep(state);
+            currentState[action.data.key] = {...action.data.troop};
+
+            return currentState;
+
         default :
             return state;
     }

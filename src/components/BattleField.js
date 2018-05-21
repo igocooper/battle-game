@@ -6,13 +6,15 @@ import { bindActionCreators } from 'redux';
 import { commonConstants } from '../constants/common';
 import { angleGenerator } from '../utils/dices';
 import { calculateAttack, calculateDefense, calculateDamage } from '../utils/common';
+import { connect } from 'react-redux';
 
 import Dices from './Dices';
 import Character from './Character';
 import Controls from './Controls';
 import Info from './Info';
 import BattleMenu from './BattleMenu';
-import { connect } from 'react-redux';
+import SelectedTroops from './SelectedTroops';
+
 
 class BattleField extends Component {
 
@@ -73,10 +75,6 @@ class BattleField extends Component {
         }, 2000)
       };
 
-      setPlayer = (player, whichPlayer) => {
-        this.props.setPlayer(player, whichPlayer);
-      };
-
       finishBattle = () => {
         this.props.updateUnitsInCombat(this.props.battlefield.players.player1, this.props.battlefield.players.player2);
         this.props.resetAllUnitsRevenge();
@@ -119,6 +117,7 @@ class BattleField extends Component {
                 <audio ref={(element) => { this.audio = element; }} src={`${process.env.PUBLIC_URL}/sounds/dice.mp3`}></audio>
             </div>
             <BattleMenu setPlayer={this.setPlayer} finishBattle={this.finishBattle}/>
+            <SelectedTroops />
         </Fragment>    
         )
     }

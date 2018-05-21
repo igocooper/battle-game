@@ -1,3 +1,12 @@
+export function setActiveMenu(active) {
+    return {
+        type: 'SET_ACTIVE_MENU',
+       data: {
+           active
+       }
+    }
+};
+
 export function updateUnitsInCombat(player1, player2) {
     return {
         type: 'UPDATE_UNITS_IN_COMBAT',
@@ -8,20 +17,21 @@ export function updateUnitsInCombat(player1, player2) {
     }
 };
 
-export function setActiveMenu(active) {
-    return {
-        type: 'SET_ACTIVE_MENU',
-       data: {
-           active
-       }
-    }
-};
-
 export function resetAllUnitsRevenge() {
     return {
         type: 'RESET_ALL_UNITS_REVENGE'
     }
 };
+
+export function addTroop(troop , key) {
+    return {
+        type: 'ADD_TROOP',
+        data: {
+            troop, 
+            key
+        }
+    }
+}
 
 // BATTLEFIELD
 
