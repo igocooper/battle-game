@@ -53,7 +53,7 @@ class Character extends Component {
             </li>
             <li>
               <div> <span className="icon">👿</span> Revenge: </div>
-              <div><span className='number'>{this.props.currentRevenge}</span></div>
+              <div><span className='number'>{this.props.currentevenge}</span></div>
             </li>
             {this.props.weapon &&
             <Fragment>

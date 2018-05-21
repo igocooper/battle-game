@@ -60,6 +60,15 @@ const battlefield = ( state = initialState , action) => {
                 }
             };
 
+        case 'RESET_ALL_UNITS_REVENGE':
+            return {
+                ...state,
+                players: {
+                    player1: {},
+                    player2: {}
+                }
+            }
+
         case 'APPLY_DAMAGE':
             const player1Hits = state.hits.player1;
             const player2Hits = state.hits.player2;
