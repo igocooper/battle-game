@@ -24,7 +24,7 @@ export function calculateAttack(attacker, dicesResults, shooting = false) {
     }
 };
 
-export function calculateDefense(defencingPlayer, dicesResults) {
+export function calculateDefense(defencingPlayer, dicesResults, isShooting) {
     // apply buffs and curses
     if (defencingPlayer.modification) {
         defencingPlayer = {
@@ -36,18 +36,29 @@ export function calculateDefense(defencingPlayer, dicesResults) {
     const luck = dicesResults.luck === 6;
     const crit = dicesResults.crit >= (7 - defencingPlayer.crit);
     let attack = dicesResults.attack + defencingPlayer.strength;
+    let revenge = defencingPlayer.currentRevenge
 
     if (attack && crit) {
         attack = (dicesResults.attack * 2 ) + defencingPlayer.strength;
     }
 
+    // player don't strike back if attacker is shooting
+    if ( isShooting ) {
+        attack = 0;
+    } else {
+        attack = defencingPlayer.currentRevenge ? attack : luck ? attack : 0
+        if (revenge > 0 ) {
+            revenge--
+        }
+    }
+    
     return {
-        attack: defencingPlayer.currentRevenge ? attack : luck ? attack : 0,
+        attack: attack,
         block: defencingPlayer.defense ? dicesResults.block + defencingPlayer.defense : 0,
         crit: crit,
         dodge: dicesResults.dodge >= (7 - defencingPlayer.agility),
         luck: false,
-        revenge: defencingPlayer.currentRevenge > 0 ? defencingPlayer.currentRevenge - 1 : defencingPlayer.currentRevenge,
+        revenge: revenge,
         attacking: false
     }
 };
@@ -65,4 +76,9 @@ export function calculateDamage(attacker, defencer) {
     }
     
     return defencerDamage >= 0 ? defencerDamage : 0
+}
+
+export function isEmptyObject(obj) {
+    if ( obj === undefined || obj === null  ) return
+    return Object.keys(obj).length === 0 && obj.constructor === Object
 }

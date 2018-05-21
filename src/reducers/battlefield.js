@@ -5,8 +5,8 @@ import { calculateAttack, calculateDefense, calculateDamage } from '../utils/com
 
 const initialState = {
     players: {
-        player1: null,
-        player2: null,
+        player1: {},
+        player2: {},
     },
     hits: {
         player1: {},
@@ -34,11 +34,14 @@ const battlefield = ( state = initialState , action) => {
             };
 
         case 'DEFENSE':
+           const enemy = action.data.whoIsDefencing === 'player1' ? 'player2' : 'player1';
+           const isShooting = state.hits[enemy].shooting;
+
             return {
                 ...state,
                 hits: {
                     ...state.hits,
-                    [action.data.whoIsDefencing] : calculateDefense(action.data.defencingPlayer, action.data.dicesResults)
+                    [action.data.whoIsDefencing] : calculateDefense(action.data.defencingPlayer, action.data.dicesResults, isShooting)
                 }
             };
 
@@ -92,11 +95,11 @@ const battlefield = ( state = initialState , action) => {
             }
 
             // apply damage & modify health
-            if ( !isPlayer2Dead && !player1Hits.shooting) {
+            if ( !isPlayer2Dead ) {
                 player1.currentHealth = player1.currentHealth - player1DamageReceived;
             }
 
-            if ( !isPlayer1Dead && !player2Hits.shooting) {
+            if ( !isPlayer1Dead ) {
                 player2.currentHealth = player2.currentHealth - player2DamageReceived;
             }
 

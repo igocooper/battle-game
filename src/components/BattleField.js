@@ -53,17 +53,17 @@ class BattleField extends Component {
         return results
       };
 
-      attack = (attacker, whoIsAttacking ) => {
+      _attack = (attacker, whoIsAttacking ) => {
         const dicesResults = this.roll();
         this.props.attack(attacker, dicesResults, whoIsAttacking);
       };
 
-      shoot = (attacker, whoIsAttacking ) => {
+      _shoot = (attacker, whoIsAttacking ) => {
         const dicesResults = this.roll();
         this.props.attack(attacker, dicesResults, whoIsAttacking, true);
       };
 
-      defense = (defencingPlayer, whoIsDefencing ) => {
+      _defense = (defencingPlayer, whoIsDefencing ) => {
         const dicesResults = this.roll();
 
         this.props.defense(defencingPlayer, dicesResults, whoIsDefencing);
@@ -94,9 +94,9 @@ class BattleField extends Component {
                     <Controls 
                         player={player1} 
                         playerId='player1'
-                        attack={this.attack} 
-                        defense={this.defense} 
-                        shoot={this.shoot}
+                        _attack={this._attack} 
+                        _defense={this._defense} 
+                        _shoot={this._shoot}
                     />
                 </div>
                 <div>
@@ -111,9 +111,9 @@ class BattleField extends Component {
                     <Controls 
                         player={player2} 
                         playerId='player2'
-                        attack={this.attack} 
-                        defense={this.defense} 
-                        shoot={this.shoot}
+                        _attack={this._attack} 
+                        _defense={this._defense} 
+                        _shoot={this._shoot}
                     />
                 </div>
                 <audio ref={(element) => { this.audio = element; }} src={`${process.env.PUBLIC_URL}/sounds/dice.mp3`}></audio>

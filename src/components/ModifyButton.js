@@ -24,7 +24,7 @@ class ModifyButton extends Component {
           <Popup
               trigger={
                 <a href="#" 
-                    className="btn-two cyan mini" 
+                    className="btn-two cyan mini fixed" 
                     onClick={ () => {
                     console.log('nothing has been done');
                 }}>
