@@ -63,3 +63,13 @@ export function setPlayer(player, whichPlayer) {
         }
     }
 }
+
+export function heal(heal, target) {
+    return {
+        type: 'HEAL',
+        data: {
+            target,
+            heal
+        }
+    }
+}

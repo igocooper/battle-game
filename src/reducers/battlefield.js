@@ -2,6 +2,7 @@ import { troopsConstants } from '../constants/troops';
 import cloneDeep from 'lodash/cloneDeep';
 import { calculateAttack, calculateDefense, calculateDamage } from '../utils/common';
 
+
 const initialState = {
     players: {
         player1: null,
@@ -39,19 +40,32 @@ const battlefield = ( state = initialState , action) => {
                     ...state.hits,
                     [action.data.whoIsDefencing] : calculateDefense(action.data.defencingPlayer, action.data.dicesResults)
                 }
-        };
+            };
+
+        case 'HEAL':
+            const player = {...state.players[action.data.target]};
+
+            var health = player.currentHealth += action.data.heal;
+            // prevent healing more then max hp
+            player.currentHealth = health > player.health ? player.health : health;
+        
+            return {
+                ...state,
+                players: {
+                    ...state.players,
+                    [action.data.target]: player
+                }
+            };
 
         case 'APPLY_DAMAGE':
             const player1Hits = state.hits.player1;
             const player2Hits = state.hits.player2;
             const player1 = {...state.players.player1};
-            const player2 = {...state.players.player2};
-
-            console.log(player2);
+            const player2 = {...state.players.player2}; 
 
             if (player1Hits.attack === undefined || player2Hits.attack === undefined) {
                 console.error('One or more players had not made their move');
-                return
+                return state
             }
 
             // calculate damage done by player 2 to player 1
@@ -91,6 +105,10 @@ const battlefield = ( state = initialState , action) => {
                 players: {
                     player1,
                     player2
+                },
+                hits: {
+                    player1: {},
+                    player2: {}
                 }
             }
 

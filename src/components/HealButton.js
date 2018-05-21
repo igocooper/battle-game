@@ -1,13 +1,24 @@
 import React, {Component} from 'react'
-import { Popup } from 'semantic-ui-react'
+import { Popup } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import * as actionCreators from '../actions/index';
+import { bindActionCreators } from 'redux';
 
 class HealButton extends Component {
   state = { healing: 10 }
 
   handleChange = (e)  => {
     const heal = parseInt( e.target.value, 10);
-    this.setState({ healing: heal })
-  }
+
+    this.setState({ healing: heal });
+  };
+
+  heal = () => {
+    this.props.heal(this.state.healing, this.props.playerId);
+    setTimeout( () => {
+      this.props.updateUnitsInCombat(this.props.battlefield.players.player1, this.props.battlefield.players.player2);
+    }, 4);
+  };
 
   render() {
     const { healing } = this.state;
@@ -16,7 +27,7 @@ class HealButton extends Component {
               trigger={
                 <a href="#" 
                   className="btn-two yellow mini" 
-                  onClick={() => this.props.heal(this.state.healing, this.props.playerId)}
+                  onClick={this.heal}
                   > 
                   ❤️ Healing
                 </a>}
@@ -35,4 +46,15 @@ class HealButton extends Component {
   }
 }
 
-export default HealButton;
+const mapStateToProps = (state) => {
+  return {
+    troops: state.troops,
+    battlefield: state.battlefield
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(actionCreators, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HealButton);
