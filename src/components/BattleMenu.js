@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { troopsConstants } from '../constants/troops';
+import { isEmptyObject } from '../utils/common';
 
 import { Header, Button, Popup, Grid, Dropdown, Menu } from 'semantic-ui-react'
 
@@ -35,10 +36,16 @@ class SelectPlayer extends Component {
 
 class BattleMenu extends Component {
   render() {
+      const { players } = this.props.battlefield;
     return (
         <div className='battle-menu'>
             <SelectPlayer {...this.props} />
-            <button onClick={this.props.finishBattle} className="btn-two green small"> ⌛️ Finish Round</button>
+            <button 
+                className="btn-two green small"
+                disabled={isEmptyObject(players.player1) || isEmptyObject(players.player2)}
+                onClick={this.props.finishBattle}
+            > ⌛️ Finish Round
+            </button>
         </div> 
     )
   }

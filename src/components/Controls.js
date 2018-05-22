@@ -61,7 +61,7 @@ class Controls extends Component {
 
         <div>
           <HealButton {...this.props}/>
-          <ModifyButton />
+          <ModifyButton {...this.props}/>
         </div>
 
       </Fragment>

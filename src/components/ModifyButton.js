@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { Popup, Button , Label, Icon } from 'semantic-ui-react'
+import { isEmptyObject } from '../utils/common';
 
 class ModifyButton extends Component {
   state = { 
@@ -20,12 +21,16 @@ class ModifyButton extends Component {
 
   render() {
     const { healing } = this.state;
+    const { players } = this.props.battlefield;
+    const disabledClass = isEmptyObject(players.player1) || isEmptyObject(players.player2) ? 'disabled' : '';
       return (
           <Popup
               trigger={
                 <a href="#" 
-                    className="btn-two cyan mini fixed" 
+                    className={`btn-two cyan mini fixed ${disabledClass}`}
+                    disabled={isEmptyObject(players.player1) || isEmptyObject(players.player2)} 
                     onClick={ () => {
+                    if (disabledClass) return;  
                     console.log('nothing has been done');
                 }}>
                     ⚙️ modify
