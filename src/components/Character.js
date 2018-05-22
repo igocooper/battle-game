@@ -53,7 +53,7 @@ class Character extends Component {
             </li>
             <li>
               <div> <span className="icon">👿</span> Revenge: </div>
-              <div><span className='number'>{this.props.currentevenge}</span></div>
+              <div><span className='number'>{this.props.currentRevenge}</span></div>
             </li>
             {this.props.weapon &&
             <Fragment>
@@ -80,7 +80,8 @@ Character.defaultProps = {
   agility: 0,
   archery: 0,
   crit: 0,
-  revenge: 0
+  revenge: 0,
+  currentRevenge: 0,
 }
 
 export default Character;

@@ -193,7 +193,7 @@ export const troopsConstants = {
                 img: 'images/troops/dark_knight2.png',
                 _troop_id: 'DARK_KNIGHTS',
                 health: 46,
-                currentHealth: 44,
+                currentHealth: 46,
                 revenge: 1,
                 currentRevenge: 1,
                 strength: 4,
@@ -680,7 +680,7 @@ export const troopsConstants = {
             },
             {
                 name: 'Pirate IV',
-                img: 'images/troops/pirate4.png',
+                img: 'images/troops/pirate5.png',
                 _troop_id: 'PIRATES',
                 health: 36,
                 currentHealth: 36,
