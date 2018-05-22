@@ -75,9 +75,10 @@ class BattleField extends Component {
         }, 2000)
       };
 
-      finishBattle = () => {
+      _finishRound = () => {
         this.props.updateUnitsInCombat(this.props.battlefield.players.player1, this.props.battlefield.players.player2);
         this.props.resetAllUnitsRevenge();
+        this.props.resetAllUnitsModification();
         
       }
 
@@ -116,7 +117,7 @@ class BattleField extends Component {
                 </div>
                 <audio ref={(element) => { this.audio = element; }} src={`${process.env.PUBLIC_URL}/sounds/dice.mp3`}></audio>
             </div>
-            <BattleMenu setPlayer={this.setPlayer} finishBattle={this.finishBattle}/>
+            <BattleMenu setPlayer={this.setPlayer} _finishRound={this._finishRound}/>
             <SelectedTroops />
         </Fragment>    
         )

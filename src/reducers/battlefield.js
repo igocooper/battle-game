@@ -1,7 +1,7 @@
 import { troopsConstants } from '../constants/troops';
 import cloneDeep from 'lodash/cloneDeep';
 import { calculateAttack, calculateDefense, calculateDamage } from '../utils/common';
-
+import update from 'react-addons-update';
 
 const initialState = {
     players: {
@@ -123,6 +123,31 @@ const battlefield = ( state = initialState , action) => {
                     player2: {}
                 }
             }
+            
+        case 'INCREASE_SKILLS':
+            var nextState = update(state, {
+                players: {[action.data.playerId]: {
+                    modification: {
+                        [action.data.skill]: { $apply: (count) => ( count ? count + 1 : 1 ) 
+                        } 
+                    }
+                }}  
+            });
+
+            return nextState;
+
+        case 'DECREASE_SKILLS':
+            var nextState = update(state, {
+                players: {[action.data.playerId]: {
+                    modification: {
+                        [action.data.skill]: { $apply: (count) => ( count ? count - 1 : 0 ) 
+                        } 
+                    }
+                }}  
+            });
+
+            return nextState;
+
 
         default :
             return state;

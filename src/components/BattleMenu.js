@@ -43,7 +43,7 @@ class BattleMenu extends Component {
             <button 
                 className="btn-two green small"
                 disabled={isEmptyObject(players.player1) || isEmptyObject(players.player2)}
-                onClick={this.props.finishBattle}
+                onClick={this.props._finishRound}
             > ⌛️ Finish Round
             </button>
         </div> 

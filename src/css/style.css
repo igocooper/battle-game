@@ -790,3 +790,6 @@ button {
 .modification-popup span {
   margin-left: 10px;
 }
+.modification-popup i.icon {
+  cursor: pointer;
+}

@@ -23,6 +23,12 @@ export function resetAllUnitsRevenge() {
     }
 };
 
+export function resetAllUnitsModification() {
+    return {
+        type: 'RESET_ALL_UNITS_MODIFICATION'
+    }
+};
+
 export function addTroop(troop , key) {
     return {
         type: 'ADD_TROOP',
@@ -80,6 +86,28 @@ export function heal(heal, target) {
         data: {
             target,
             heal
+        }
+    }
+}
+
+export function increaseSkills(skill, playerId, player) {
+    return {
+        type: 'INCREASE_SKILLS',
+        data: {
+            skill,
+            playerId,
+            player
+        }
+    }
+}
+
+export function decreaseSkills(skill, playerId, player) {
+    return {
+        type: 'DECREASE_SKILLS',
+        data: {
+            skill,
+            playerId,
+            player
         }
     }
 }

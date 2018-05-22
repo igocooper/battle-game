@@ -11,6 +11,14 @@ class Character extends Component {
     const healthPercent = health/this.props.health;
     const isDead = this.props.currentHealth <= 0;
 
+    const strength = this.props.modification.strength ? this.props.strength + this.props.modification.strength : this.props.strength;
+    const crit = this.props.modification.crit ? this.props.crit + this.props.modification.crit : this.props.crit;
+    const defense = this.props.modification.defense ? this.props.defense + this.props.modification.defense : this.props.defense;
+    const agility = this.props.modification.agility ? this.props.agility + this.props.modification.agility : this.props.agility;
+    const movement = this.props.modification.movement ? this.props.movement + this.props.modification.movement : this.props.movement;
+    const archery = this.props.modification.archery ? this.props.archery + this.props.modification.archery : this.props.archery;
+    const currentRevenge = this.props.modification.currentRevenge ? this.props.currentRevenge + this.props.modification.currentRevenge : this.props.currentRevenge;
+
     return (
         <div className='character'>
           <div>
@@ -29,31 +37,31 @@ class Character extends Component {
             </li>
             <li>
               <div> <span className="icon">🗡</span> Strength: </div>
-              <div><span className='number'>{this.props.strength}</span></div>
+              <div><span className='number'>{strength}</span></div>
             </li>
             <li>
               <div><span className="icon">⚔️</span> Critical Damage: </div> 
-               <div><span className='number'>{this.props.crit}</span></div>
+               <div><span className='number'>{crit}</span></div>
             </li>
             <li>
               <div><span className="icon">🛡</span> Defense: </div>
-              <div><span className='number'>{this.props.defense}</span></div>
+              <div><span className='number'>{defense}</span></div>
             </li>
             <li>
              <div> <span className="icon">🏇</span> Movement: </div>
-             <div><span className='number'>{this.props.movement}</span></div>
+             <div><span className='number'>{movement}</span></div>
             </li>
             <li>
               <div><span className="icon">🐍</span> Agility: </div>
-              <div><span className='number'>{this.props.agility}</span></div>
+              <div><span className='number'>{agility}</span></div>
             </li>
             <li>
              <div> <span className="icon">🏹</span> Archery: </div>
-             <div><span className='number'>{this.props.archery}</span></div>
+             <div><span className='number'>{archery}</span></div>
             </li>
             <li>
               <div> <span className="icon">👿</span> Revenge: </div>
-              <div><span className='number'>{this.props.currentRevenge}</span></div>
+              <div><span className='number'>{currentRevenge}</span></div>
             </li>
             {this.props.weapon &&
             <Fragment>
@@ -82,6 +90,7 @@ Character.defaultProps = {
   crit: 0,
   revenge: 0,
   currentRevenge: 0,
+  modification: {}
 }
 
 export default Character;

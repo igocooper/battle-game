@@ -3,26 +3,10 @@ import { Popup, Button , Label, Icon } from 'semantic-ui-react'
 import { isEmptyObject } from '../utils/common';
 
 class ModifyButton extends Component {
-  state = { 
-      strength: 0,
-      dodge: 0,
-      defense: 0,
-      crit: 0,
-      agility: 0,
-      archery: 0,
-      movement: 0,
-      revenge: 0
-    }
-
-  handleChange = (e)  => {
-    const heal = parseInt( e.target.value, 10);
-    this.setState({ healing: heal })
-  }
-
   render() {
-    const { healing } = this.state;
     const { players } = this.props.battlefield;
     const disabledClass = isEmptyObject(players.player1) || isEmptyObject(players.player2) ? 'disabled' : '';
+    const { player } = this.props;
       return (
           <Popup
               trigger={
@@ -31,7 +15,6 @@ class ModifyButton extends Component {
                     disabled={isEmptyObject(players.player1) || isEmptyObject(players.player2)} 
                     onClick={ () => {
                     if (disabledClass) return;  
-                    console.log('nothing has been done');
                 }}>
                     ⚙️ modify
                 </a>
@@ -42,31 +25,38 @@ class ModifyButton extends Component {
           >
             <div className="modification-popup">
               <div>
-                <Icon name="add circle" color='green' style={{cursor: 'pointer'}}/>/<Icon name="minus circle" color='red' style={{cursor: 'pointer'}}/>
+                <Icon name="add circle" color='green'  onClick={() => this.props.increaseSkills('strength', this.props.playerId, player)}/>
+                /<Icon name="minus circle" color='red' onClick={() => this.props.decreaseSkills('strength', this.props.playerId, player)}/>
                   <span>🗡 </span>
               </div>
               <div>
-                <Icon name="add circle" color='green' style={{cursor: 'pointer'}}/>/<Icon name="minus circle" color='red' style={{cursor: 'pointer'}}/>
+                <Icon name="add circle" color='green' onClick={() => this.props.increaseSkills('crit', this.props.playerId, player)}/>
+                /<Icon name="minus circle" color='red' onClick={() => this.props.decreaseSkills('crit', this.props.playerId, player)}/>
                   <span>⚔️ </span>
               </div>
               <div>
-                <Icon name="add circle" color='green' style={{cursor: 'pointer'}}/>/<Icon name="minus circle" color='red' style={{cursor: 'pointer'}}/>
+                <Icon name="add circle" color='green' onClick={() => this.props.increaseSkills('defense', this.props.playerId, player)}/>
+                /<Icon name="minus circle" color='red' onClick={() => this.props.decreaseSkills('defense', this.props.playerId, player)}/>
                   <span>🛡 </span> 
               </div>
               <div>
-                <Icon name="add circle" color='green' style={{cursor: 'pointer'}}/>/<Icon name="minus circle" color='red' style={{cursor: 'pointer'}}/>
+                <Icon name="add circle" color='green' onClick={() => this.props.increaseSkills('movement', this.props.playerId, player)}/>
+                /<Icon name="minus circle" color='red' onClick={() => this.props.decreaseSkills('movement', this.props.playerId, player)}/>
                   <span>🏇 </span>
               </div>
               <div>
-                <Icon name="add circle" color='green' style={{cursor: 'pointer'}}/>/<Icon name="minus circle" color='red' style={{cursor: 'pointer'}}/>
+                <Icon name="add circle" color='green' onClick={() => this.props.increaseSkills('agility', this.props.playerId, player)}/>
+                /<Icon name="minus circle" color='red' onClick={() => this.props.decreaseSkills('agility', this.props.playerId, player)}/>
                   <span>🐍  </span>
               </div>
               <div>
-                <Icon name="add circle" color='green' style={{cursor: 'pointer'}}/>/<Icon name="minus circle" color='red' style={{cursor: 'pointer'}}/>
+                <Icon name="add circle" color='green' onClick={() => this.props.increaseSkills('archery', this.props.playerId, player)}/>
+                /<Icon name="minus circle" color='red' onClick={() => this.props.decreaseSkills('archery', this.props.playerId, player)}/>
                  <span style={{marginLeft:'10px'}}> 🏹  </span>
               </div>
               <div>
-                <Icon name="add circle" color='green' style={{cursor: 'pointer'}}/>/<Icon name="minus circle" color='red' style={{cursor: 'pointer'}}/>
+                <Icon name="add circle" color='green' onClick={() => this.props.increaseSkills('revenge', this.props.playerId, player)}/>
+                /<Icon name="minus circle" color='red' onClick={() => this.props.decreaseSkills('revenge', this.props.playerId, player)}/>
                   <span>👿  </span>
               </div>
                     

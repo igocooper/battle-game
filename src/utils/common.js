@@ -1,10 +1,15 @@
+import update from 'react-addons-update';
+
 export function calculateAttack(attacker, dicesResults, shooting = false) {
     // apply buffs and curses
-    if (attacker.modification) {
-        attacker = {
-            ...attacker,
-            ...attacker.modification
-        };
+    if (!isEmptyObject(attacker.modification)) {
+        Object.entries(attacker.modification).forEach( ( [skill, value] ) => {
+            attacker = update(attacker, {
+                [skill]: {$apply: (state) => state + value}
+            });
+        });
+
+        console.log(attacker);
     }
 
     const crit =  dicesResults.crit >= (7 - attacker.crit);
