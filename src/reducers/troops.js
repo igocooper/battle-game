@@ -1,6 +1,9 @@
-import { troopsConstants } from '../constants/troops';
+import {
+    troopsConstants
+} from '../constants/troops';
 import cloneDeep from 'lodash/cloneDeep';
 import update from 'react-addons-update';
+import { commonConstants } from '../constants/common';
 
 const initialState = {
     // ...troopsConstants
@@ -8,18 +11,20 @@ const initialState = {
 
 
 const units = (state = [], action) => {
-    switch(action.type){
+    switch (action.type) {
         case 'INCREASE_SKILLS':
             var unitIndex;
-            state.forEach( (unit, index) => {
-                if (unit.name === action.data.player.name){
+            state.forEach((unit, index) => {
+                if (unit.name === action.data.player.name) {
                     unitIndex = index;
                 }
             });
             var nextState = update(state, {
                 [unitIndex]: {
                     modification: {
-                        [action.data.skill]: { $apply: (count) => (count ? count + 1 : 1)}
+                        [action.data.skill]: {
+                            $apply: (count) => (count ? count + 1 : 1)
+                        }
                     }
                 }
             });
@@ -27,15 +32,17 @@ const units = (state = [], action) => {
 
         case 'DECREASE_SKILLS':
             var unitIndex;
-            state.forEach( (unit, index) => {
-                if (unit.name === action.data.player.name){
+            state.forEach((unit, index) => {
+                if (unit.name === action.data.player.name) {
                     unitIndex = index;
                 }
             });
             var nextState = update(state, {
                 [unitIndex]: {
                     modification: {
-                        [action.data.skill]: { $apply: (count) => (count ? count - 1 : 0)}
+                        [action.data.skill]: {
+                            $apply: (count) => (count ? count - 1 : 0)
+                        }
                     }
                 }
             });
@@ -43,8 +50,8 @@ const units = (state = [], action) => {
     }
 };
 
-const troops = ( state = initialState , action) => {
-    switch(action.type) {
+const troops = (state = initialState, action) => {
+    switch (action.type) {
         case 'UPDATE_UNITS_IN_COMBAT':
             const troop1 = cloneDeep(state[action.data.player1._troop_id]);
             const troop2 = cloneDeep(state[action.data.player2._troop_id]);
@@ -52,13 +59,13 @@ const troops = ( state = initialState , action) => {
             let unit2Index;
 
             // find player 1
-            troop1.units.forEach( (unit, index) => {
+            troop1.units.forEach((unit, index) => {
                 if (unit.name === action.data.player1.name) {
                     unit1Index = index;
                 }
             });
             // find player 2
-            troop2.units.forEach( (unit, index) => {
+            troop2.units.forEach((unit, index) => {
                 if (unit.name === action.data.player2.name) {
                     unit2Index = index;
                 }
@@ -74,16 +81,16 @@ const troops = ( state = initialState , action) => {
 
             return {
                 ...state,
-                [action.data.player1._troop_id] : troop1,
-                [action.data.player2._troop_id] : troop2,
+                [action.data.player1._troop_id]: troop1,
+                [action.data.player2._troop_id]: troop2,
             }
 
         case 'RESET_ALL_UNITS_REVENGE':
             var currentState = cloneDeep(state);
-            
+
             // map through each and set it's current revenge to revenge
-            Object.entries(currentState).forEach( ( [key, value] ) => {
-                value.units.forEach( (unit, unitIndex) => {
+            Object.entries(currentState).forEach(([key, value]) => {
+                value.units.forEach((unit, unitIndex) => {
                     const revenge = unit.revenge;
                     currentState[key].units[unitIndex].currentRevenge = revenge;
                 });
@@ -93,10 +100,10 @@ const troops = ( state = initialState , action) => {
 
         case 'RESET_ALL_UNITS_MODIFICATION':
             var currentState = cloneDeep(state);
-            
+
             // map through each and reset it's modification
-            Object.entries(currentState).forEach( ( [key, value] ) => {
-                value.units.forEach( (unit, unitIndex) => {
+            Object.entries(currentState).forEach(([key, value]) => {
+                value.units.forEach((unit, unitIndex) => {
                     currentState[key].units[unitIndex].modification = {};
                 });
             });
@@ -105,17 +112,9 @@ const troops = ( state = initialState , action) => {
 
         case 'ADD_TROOP':
             var nextState = update(state, {
-                [action.data.key]: { $set: {...action.data.troop} }
-            });
-
-            return nextState;
-
-        case 'INCREASE_SKILLS':
-            var troop_id = action.data.player._troop_id;
-
-            var nextState = update(state, {
-                [troop_id]: {
-                    units: {$apply: (state) => ( units(state, action)) }
+                [action.data.key]: {
+                    $set: { ...action.data.troop
+                    }
                 }
             });
 
@@ -126,13 +125,39 @@ const troops = ( state = initialState , action) => {
 
             var nextState = update(state, {
                 [troop_id]: {
-                    units: {$apply: (state) => ( units(state, action)) }
+                    units: {
+                        $apply: (state) => (units(state, action))
+                    }
                 }
             });
 
             return nextState;
 
-        default :
+        case 'INCREASE_SKILLS':
+            var troop_id = action.data.player._troop_id;
+
+            var nextState = update(state, {
+                [troop_id]: {
+                    units: {
+                        $apply: (state) => (units(state, action))
+                    }
+                }
+            });
+
+        case 'ADD_ZOMBIE':
+            var zombie = {...commonConstants.ZOMBIE};
+
+            var nextState = update(state, {
+                [action.data.troopId]: {
+                    units: {
+                        $push: [zombie]
+                    }
+                }
+            });
+
+            return nextState;
+
+        default:
             return state;
     }
 

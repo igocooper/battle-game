@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Table } from 'semantic-ui-react';
+import { troopsConstants } from '../constants/troops';
+import { stringComparator } from '../utils/common';
 
 
 const TroopsList = (props) => {
+    // sort array
+    const troops = troopsConstants && Object.entries(troopsConstants).sort(stringComparator);
     return (
       <Table celled inverted selectable>
         <Table.Header>
@@ -15,7 +18,7 @@ const TroopsList = (props) => {
         </Table.Header>
 
         <Table.Body>
-          {props.troops && Object.entries(props.troops).map( ([key, value]) => {
+          {troops && troops.map( ([key, value]) => {
             const totalHealth = value.units.reduce( (total, unit) => total += unit.health, 0);
             const units = value.units.length;
               return (

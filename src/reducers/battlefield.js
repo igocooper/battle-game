@@ -17,33 +17,34 @@ const initialState = {
 const battlefield = ( state = initialState , action) => {
     switch(action.type) {
         case 'SET_PLAYER':
-            return {
-                ...state,
+            var nextState = update(state, {
                 players: {
-                    ...state.players,
-                    [action.data.whichPlayer]: action.data.player
+                    [action.data.whichPlayer]: {$set: action.data.player}
                 }
-            }
+            });
+
+            return nextState;
+
         case 'ATTACK':
-            return {
-                ...state,
+            var nextState = update(state, {
                 hits: {
-                    ...state.hits,
-                    [action.data.whoIsAttacking] : calculateAttack(action.data.attacker, action.data.dicesResults, action.data.isShooting)
+                    [action.data.whoIsAttacking]: {$set: calculateAttack(action.data.attacker, action.data.dicesResults, action.data.isShooting)}
                 }
-            };
+            });
+
+            return nextState;
 
         case 'DEFENSE':
            const enemy = action.data.whoIsDefencing === 'player1' ? 'player2' : 'player1';
            const isShooting = state.hits[enemy].shooting;
 
-            return {
-                ...state,
+           var nextState = update(state, {
                 hits: {
-                    ...state.hits,
-                    [action.data.whoIsDefencing] : calculateDefense(action.data.defencingPlayer, action.data.dicesResults, isShooting)
+                    [action.data.whoIsDefencing]: {$set: calculateDefense(action.data.defencingPlayer, action.data.dicesResults, isShooting)}
                 }
-            };
+            });
+
+            return nextState;
 
         case 'HEAL':
             const player = {...state.players[action.data.target]};
@@ -51,23 +52,24 @@ const battlefield = ( state = initialState , action) => {
             var health = player.currentHealth += action.data.heal;
             // prevent healing more then max hp
             player.currentHealth = health > player.health ? player.health : health;
-        
-            return {
-                ...state,
+
+            var nextState = update(state, {
                 players: {
-                    ...state.players,
-                    [action.data.target]: player
+                    [action.data.target]: {$set: player}
                 }
-            };
+            });
+        
+            return nextState;
 
         case 'RESET_ALL_UNITS_REVENGE':
-            return {
-                ...state,
+            var nextState = update(state, {
                 players: {
-                    player1: {},
-                    player2: {}
+                    player1: {currentRevenge: {$set: state.players.player1.revenge}},
+                    player2: {currentRevenge: {$set: state.players.player2.revenge}},
                 }
-            }
+            });
+
+            return nextState;
 
         case 'APPLY_DAMAGE':
             const player1Hits = state.hits.player1;

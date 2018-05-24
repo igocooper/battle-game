@@ -87,3 +87,14 @@ export function isEmptyObject(obj) {
     if ( obj === undefined || obj === null  ) return
     return Object.keys(obj).length === 0 && obj.constructor === Object
 }
+
+
+export function stringComparator(a, b) {
+    if (a > b) {
+      return 1;
+    }
+    if (a < b) {
+      return -1;
+    }
+    return 0;
+  }

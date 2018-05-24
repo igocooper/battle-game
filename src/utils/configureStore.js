@@ -8,11 +8,10 @@ import { commonConstants } from '../constants/common';
 
 const configureStore = () => {
 
-    // const persistedState = loadState();
-    // const persistedState = [...commonConstants.DEFAULT_TROOPS];
+    const persistedState = loadState();
     const store = createStore(
         root,
-        // persistedState,
+        persistedState,
         composeWithDevTools(applyMiddleware(
             ReduxThunk
         ))
@@ -20,7 +19,7 @@ const configureStore = () => {
 
     store.subscribe( throttle( () => {
         saveState({
-            troops: store.getState().troops
+            ...store.getState()
         });
     }, 1000));
 

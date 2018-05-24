@@ -280,21 +280,38 @@ export const commonConstants = {
                 }
             ]
         },
-
-
     ],
     DEFAULT_UNIT: {
         name: '',
-        img: '',
-        health: 0,
-        currentHealth: 0,
-        revenge: 0,
+        img: 'images/character_sample.png',
+        _troop_id: '',
+        health: 1,
+        currentHealth: 1,
         strength: 0,
         defense: 0,
         movement: 0,
         agility: 0,
         archery: 0,
-        crit: 0
+        crit: 0,
+        revenge: 0,
+        currentRevenge: 0,
+        modification: {}
+    },
+    ZOMBIE: {
+        name: 'Zombie',
+        img: 'images/zombie.png',
+        _troop_id: '',
+        health: 32,
+        currentHealth: 32,
+        strength: 0,
+        defense: 0,
+        movement: 0,
+        agility: 0,
+        archery: 0,
+        crit: 1,
+        revenge: 1,
+        currentRevenge: 1,
+        modification: {}
     },
     DICES_ANGLES: {
         1: {
