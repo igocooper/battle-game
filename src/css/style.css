@@ -718,11 +718,7 @@ label {
 .log .devider {
   font-size: 16px;
 }
-.selected-troops {
-  background: #333;
-}
 .selected-troops__tab {
-  background: #333;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -731,7 +727,6 @@ label {
           justify-content: center;
 }
 .troop {
-  background: #333;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -746,7 +741,7 @@ label {
   margin: 10px;
 }
 #root {
-  background: #333;
+  background: url("http://res.cloudinary.com/igocooper/image/upload/v1527333280/bg_ohucug.png");
   height: 100vh;
 }
 button {
@@ -759,7 +754,6 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background: #333;
   -ms-flex-pack: distribute;
       justify-content: space-around;
   -webkit-box-align: center;
@@ -776,7 +770,6 @@ button {
   }
 }
 .battle-menu {
-  background: #333;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

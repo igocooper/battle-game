@@ -133,7 +133,7 @@ const troops = (state = initialState, action) => {
 
             return nextState;
 
-        case 'INCREASE_SKILLS':
+        case 'DECREASE_SKILLS':
             var troop_id = action.data.player._troop_id;
 
             var nextState = update(state, {

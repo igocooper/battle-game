@@ -71,6 +71,16 @@ const battlefield = ( state = initialState , action) => {
 
             return nextState;
 
+        case 'RESET_ALL_UNITS_MODIFICATION':
+            var nextState = update(state, {
+                players: {
+                    player1: {modification: {$set: {} }},
+                    player2: {modification: {$set: {} }},
+                }
+            });
+
+            return nextState;
+
         case 'APPLY_DAMAGE':
             const player1Hits = state.hits.player1;
             const player2Hits = state.hits.player2;
