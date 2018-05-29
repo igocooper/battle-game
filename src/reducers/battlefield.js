@@ -152,7 +152,8 @@ const battlefield = ( state = initialState , action) => {
             var nextState = update(state, {
                 players: {[action.data.playerId]: {
                     modification: {
-                        [action.data.skill]: { $apply: (count) => ( count ? count - 1 : 0 ) 
+                        [action.data.skill]: { 
+                            $apply: (count) => (count !== undefined ? count - 1 : -1) 
                         } 
                     }
                 }}  

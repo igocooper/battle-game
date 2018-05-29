@@ -40,8 +40,8 @@ const units = (state = [], action) => {
             var nextState = update(state, {
                 [unitIndex]: {
                     modification: {
-                        [action.data.skill]: {
-                            $apply: (count) => (count ? count - 1 : 0)
+                        [action.data.skill]: { 
+                            $apply: (count) => (count !== undefined ? count - 1 : -1) 
                         }
                     }
                 }

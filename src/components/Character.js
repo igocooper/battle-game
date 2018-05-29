@@ -2,21 +2,21 @@ import React, { Component, Fragment } from 'react';
 
 class Character extends Component {
  
-  render() {
+  render() { 
     let health = this.props.currentHealth;
-    // fix health percent for negative numvers
+    // ? fix health percent for negative numvers
     if (health < 0 ) {
       health = 0;
     }
     const healthPercent = health/this.props.health;
     const isDead = this.props.currentHealth <= 0;
 
-    const strength = this.props.modification.strength ? this.props.strength + this.props.modification.strength : this.props.strength;
-    const crit = this.props.modification.crit ? this.props.crit + this.props.modification.crit : this.props.crit;
-    const defense = this.props.modification.defense ? this.props.defense + this.props.modification.defense : this.props.defense;
-    const agility = this.props.modification.agility ? this.props.agility + this.props.modification.agility : this.props.agility;
-    const movement = this.props.modification.movement ? this.props.movement + this.props.modification.movement : this.props.movement;
-    const archery = this.props.modification.archery ? this.props.archery + this.props.modification.archery : this.props.archery;
+    const strength = this.props.modification.strength !== undefined ? this.props.strength + this.props.modification.strength : this.props.strength;
+    const crit = this.props.modification.crit !== undefined ? this.props.crit + this.props.modification.crit : this.props.crit;
+    const defense = this.props.modification.defense !== undefined ? this.props.defense + this.props.modification.defense : this.props.defense;
+    const agility = this.props.modification.agility !== undefined ? this.props.agility + this.props.modification.agility : this.props.agility;
+    const movement = this.props.modification.movement !== undefined ? this.props.movement + this.props.modification.movement : this.props.movement;
+    const archery = this.props.modification.archery !== undefined ? this.props.archery + this.props.modification.archery : this.props.archery;
     const currentRevenge = this.props.modification.currentRevenge ? this.props.currentRevenge + this.props.modification.currentRevenge : this.props.currentRevenge;
 
     return (

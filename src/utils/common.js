@@ -8,8 +8,6 @@ export function calculateAttack(attacker, dicesResults, shooting = false) {
                 [skill]: {$apply: (state) => state + value}
             });
         });
-
-        console.log(attacker);
     }
 
     const crit =  dicesResults.crit >= (7 - attacker.crit);
@@ -31,12 +29,13 @@ export function calculateAttack(attacker, dicesResults, shooting = false) {
 
 export function calculateDefense(defencingPlayer, dicesResults, isShooting) {
     // apply buffs and curses
-    if (defencingPlayer.modification) {
-        defencingPlayer = {
-            ...defencingPlayer,
-            ...defencingPlayer.modification
-        }
-    } 
+    if (!isEmptyObject(defencingPlayer.modification)) {
+        Object.entries(defencingPlayer.modification).forEach( ( [skill, value] ) => {
+            defencingPlayer = update(defencingPlayer, {
+                [skill]: {$apply: (state) => state + value}
+            });
+        });
+    }
 
     const luck = dicesResults.luck === 6;
     const crit = dicesResults.crit >= (7 - defencingPlayer.crit);
