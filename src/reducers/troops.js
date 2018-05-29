@@ -144,6 +144,8 @@ const troops = (state = initialState, action) => {
                 }
             });
 
+            return nextState;
+
         case 'ADD_ZOMBIE':
             var zombie = {...commonConstants.ZOMBIE};
 
