@@ -1,6 +1,26 @@
 import React, { Component, Fragment } from 'react';
 
 class Unit extends Component {
+
+  _handleSelectPlayer1 = () => {
+    const isDisabled = this.props.battlefield.players.player2._troop_id === this.props._troop_id;
+
+    if(!isDisabled) {
+      this.props.setPlayer(this.props.unit, 'player1');
+    }
+     
+  };
+
+  _handleSelectPlayer2 = (e) => {
+    e.preventDefault();
+    const isDisabled = this.props.battlefield.players.player1._troop_id === this.props._troop_id;
+
+    if(!isDisabled) {
+      this.props.setPlayer(this.props.unit, 'player2');
+    }
+   
+};
+
  
   render() {
     let health = this.props.currentHealth;
@@ -13,13 +33,8 @@ class Unit extends Component {
 
     return (
         <div className='character' 
-            onClick={() => {
-                this.props.setPlayer(this.props.unit, 'player1')
-            }}
-            onContextMenu={(e) => {
-                e.preventDefault();
-                this.props.setPlayer(this.props.unit, 'player2')
-            }}
+            onClick={this._handleSelectPlayer1}
+            onContextMenu={this._handleSelectPlayer2}
             >
           <div>
             <img src={ isDead ? `${process.env.PUBLIC_URL}/images/dead.png` : `${process.env.PUBLIC_URL}/${this.props.img}`} alt=""/>
