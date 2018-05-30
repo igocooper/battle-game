@@ -11,8 +11,10 @@ class Controls extends Component {
     const { hits, players } = this.props.battlefield;
     const enemy = this.props.playerId === 'player1' ? 'player2' : 'player1';
 
-    const isAttackDissabled = ( isEmptyObject(players[this.props.playerId]) || isEmptyObject(players[enemy]) ) || !isEmptyObject(hits[enemy]);
-    const isDefenseDissabled = ( isEmptyObject(players[this.props.playerId]) || isEmptyObject(players[enemy]) ) || isEmptyObject(hits[enemy]);
+    console.log(`${this.props.playerId}: `, players[this.props.playerId].currentHealth <= 0);
+    console.log(players[enemy].currentHealth <= 0);
+    const isAttackDissabled = isEmptyObject(players[this.props.playerId]) || isEmptyObject(players[enemy])  || !isEmptyObject(hits[enemy]) || players[this.props.playerId].currentHealth <= 0 || players[enemy].currentHealth <= 0;
+    const isDefenseDissabled =  isEmptyObject(players[this.props.playerId]) || isEmptyObject(players[enemy])  || isEmptyObject(hits[enemy]);
     const disabledDefenseClass = isDefenseDissabled ? 'disabled' : '';
     const disabledAttackClass = isAttackDissabled ? 'disabled' : '';
     
