@@ -2,7 +2,7 @@ import update from 'react-addons-update';
 
 export function calculateAttack(attacker, dicesResults, shooting = false) {
     // apply buffs and curses
-    if (!isEmptyObject(attacker.modification)) {
+    if (attacker.modification && !isEmptyObject(attacker.modification)) {
         Object.entries(attacker.modification).forEach( ( [skill, value] ) => {
             attacker = update(attacker, {
                 [skill]: {$apply: (state) => state + value}
@@ -29,7 +29,7 @@ export function calculateAttack(attacker, dicesResults, shooting = false) {
 
 export function calculateDefense(defencingPlayer, dicesResults, isShooting) {
     // apply buffs and curses
-    if (!isEmptyObject(defencingPlayer.modification)) {
+    if (defencingPlayer.modification && !isEmptyObject(defencingPlayer.modification)) {
         Object.entries(defencingPlayer.modification).forEach( ( [skill, value] ) => {
             defencingPlayer = update(defencingPlayer, {
                 [skill]: {$apply: (state) => state + value}
@@ -83,7 +83,7 @@ export function calculateDamage(attacker, defencer) {
 }
 
 export function isEmptyObject(obj) {
-    if ( obj === undefined || obj === null  ) return
+    if ( obj === undefined || obj === null  ) return false
     return Object.keys(obj).length === 0 && obj.constructor === Object
 }
 
