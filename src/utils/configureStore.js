@@ -8,7 +8,10 @@ import { commonConstants } from '../constants/common';
 
 const configureStore = () => {
 
-    const persistedState = loadState();
+    const persistedState = {
+        menu: loadState()
+    };
+
     const store = createStore(
         root,
         persistedState,

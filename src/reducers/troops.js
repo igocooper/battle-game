@@ -52,6 +52,14 @@ const units = (state = [], action) => {
 
 const troops = (state = initialState, action) => {
     switch (action.type) {
+        case 'SET_TROOPS':
+            var nextState = action.payload;
+            return nextState;
+
+        case 'CLEAR_TROOPS':
+            // clear all troops
+            return {};
+
         case 'UPDATE_UNITS_IN_COMBAT':
             const troop1 = cloneDeep(state[action.data.player1._troop_id]);
             const troop2 = cloneDeep(state[action.data.player2._troop_id]);

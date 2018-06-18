@@ -1,12 +1,10 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import '../css/style.css';
 import * as actionCreators from '../actions/index';
-import { bindActionCreators } from 'redux';
 
 import { commonConstants } from '../constants/common';
 import { angleGenerator } from '../utils/dices';
-import { calculateAttack, calculateDefense, calculateDamage } from '../utils/common';
-import { connect } from 'react-redux';
 
 import Dices from './Dices';
 import Character from './Character';
@@ -15,8 +13,40 @@ import Info from './Info';
 import BattleMenu from './BattleMenu';
 import SelectedTroops from './SelectedTroops';
 
+// fireBase sync
+import { firebaseApp } from '../firebase';
+import { linkStoreWithPath } from 'firebase-redux';
+
 
 class BattleField extends Component {
+    componentDidMount = () => {
+        const { id } = this.props.match.params;
+
+        // The database path you want to bind with
+        const troopsPath = `/troops/${id}`
+
+        // Portion of the state that should be written to the database
+        const troopsSelector = (state) => state.troops;
+
+        // Create a function to bind '/message' in the database
+        // with 'state.message' in the Redux store
+        const linkTroops = linkStoreWithPath(   
+            troopsPath, 
+            actionCreators.setTroops, 
+            troopsSelector
+        );
+
+        const { store } = this.context;
+        // Invoke anywhere in the code to set up the binding
+        this.unlink = linkTroops(firebaseApp.database(), store);
+    }
+
+    componentWillUnmount = () => {
+        // Invoke unlink to remove the binding
+        this.unlink();
+    }
+    
+    
 
     roll = () => {
         // play audio
@@ -123,6 +153,10 @@ class BattleField extends Component {
         )
     }
 }
+
+BattleField.contextTypes = {
+    store: PropTypes.object
+};
 
 export default BattleField;
 

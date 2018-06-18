@@ -111,3 +111,35 @@ export function decreaseSkills(skill, playerId, player) {
         }
     }
 }
+
+export function addBattleField(battleField) {
+    return {
+        type: 'ADD_BATTLEFIELD',
+        data: {
+            battleField
+        }
+    }
+}
+
+
+// Firebase sync actions 
+
+export function setTroops(troops) {
+    return {
+        type: 'SET_TROOPS',
+        payload: troops
+      };
+}
+
+export function clearTroops() {
+    return {
+        type: 'CLEAR_TROOPS'
+      };
+}
+
+export function setBattleFields(battleFields) {
+    return {
+        type: 'SET_BATTLEFIELDS',
+        payload: battleFields
+      };
+}

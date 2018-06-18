@@ -12,6 +12,9 @@ button
 button
   cursor: pointer
 
+.ui.page.modals.active
+  display: flex !important
+
 .board 
   display: flex
   // background: #333
@@ -23,19 +26,24 @@ button
         flex-direction: column
   }
 
+.battlefields-header 
+  color: #FFF
+
+.battlefields-modal.error
+  color red 
 
 .battle-menu
     // background #333
     display: flex
-    justify-content center
+    justify-content: center
     align-items: center 
 
 .modification-popup
    span 
-      margin-left 10px   
+      margin-left: 10px   
    i.icon 
-     cursor pointer    
+     cursor: pointer    
 
 .ui.grey.menu 
-  background #rgba(118, 118, 118, .8)     
+  background: rgba(118, 118, 118, .8)     
  
